@@ -15,11 +15,14 @@
 
 <style lang="scss">
 	#header {
-		padding: 10px 0;
+		$headerHeight: 2em;
+		padding: 4px 0;
 		text-align: center;
 		background: #fb4651;
-		font-size: 1.2em;
+		font-size: 1.4em;
 		color:#fff;
+		height: $headerHeight;
+		line-height:$headerHeight;
 	}
 
 </style>
