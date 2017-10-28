@@ -1,8 +1,8 @@
 <template>
 	<div class="content-list">
-		<div class="content-item" v-for="item in items">
-			{{ item.name }}
-		</div>
+		<router-link class="content-item" v-for="item of items" :to="item.url" :key="item.id">
+			<div>{{item.name}},{{item.id}}</div>
+		</router-link>
 	</div>
 </template>
 
@@ -23,17 +23,56 @@
 			return {
 				items: [
 					{
-						name: 'gan'
+						name: 'gan',
+						id:1,
+						url: {
+							name: 'content',
+							params: {
+								contentId: 1,
+							}
+						}
 					},
 					{
-						name: 'yang'
+						name: 'yang',
+						id:2,
+						url: {
+							name: 'content',
+							params: {
+								contentId: 2,
+							}
+						}
 					},
 					{
-						name: 'zhou'
+						name: 'zhou',
+						id:3,
+						url: {
+							name: 'content',
+							params: {
+								contentId: 3,
+							}
+						}
 					},
 					{
-						name: 'wei'
+						name: 'wei',
+						id:4,
+						url: {
+							name: 'content',
+							params: {
+								contentId: 4,
+							}
+						}
 					},
+					{
+						name: 'test',
+						id:5,
+						url: {
+							name: 'content',
+							params: {
+								contentId: 5,
+							}
+						}
+					},
+
 				]
 			}
 		}
@@ -45,5 +84,6 @@
 		padding: 1em;
 		height: 10em;
 		border-bottom: 1px solid #e8e8e8;
+		display: block;
 	}
 </style>
