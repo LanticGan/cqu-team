@@ -10,10 +10,6 @@
 	export default {
 		name: 'contentList',
 		props: {
-			conditions: {
-				type: String,
-				default: '',
-			},
 			filter1: {
 				type: String,
 				default: '',

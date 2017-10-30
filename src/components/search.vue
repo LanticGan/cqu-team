@@ -12,7 +12,7 @@
 			</div>
 		</form>
     </div>
-    <content-list :conditions="conditions"></content-list>
+    <content-list :conditions="filter1"></content-list>
 </div>
 </template>
 <script>
@@ -23,7 +23,7 @@
 			return {
 				isSearching: false,
 				inputHolder: '',
-				conditions: '',
+				filter1: '',
 			}
 		},
 		methods: {
