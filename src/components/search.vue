@@ -12,7 +12,7 @@
 			</div>
 		</form>
     </div>
-    <content-list :conditions="filter1"></content-list>
+    <content-list :filter1="filter1"></content-list>
 </div>
 </template>
 <script>
