@@ -8649,6 +8649,8 @@ if (false) {(function () {
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'header',
@@ -8675,7 +8677,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "header" } }, [
-      _c("span", [_vm._v("组队系统")])
+      _c("span", [_vm._v("组队系统")]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "add-info" } })
     ])
   }
 ]
@@ -12169,7 +12173,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("content-list", { attrs: { conditions: _vm.filter1 } })
+      _c("content-list", { attrs: { filter1: _vm.filter1 } })
     ],
     1
   )
