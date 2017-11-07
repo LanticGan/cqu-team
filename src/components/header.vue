@@ -21,11 +21,12 @@
 		$headerHeight: 2em;
 		padding: 4px 0;
 		text-align: center;
-		background: #fb4651;
+		background: #fff;
 		font-size: 1.4em;
-		color:#fff;
+		color:#fb4651;
 		height: $headerHeight;
 		line-height:$headerHeight;
+		border-bottom:solid 1px #efefef;
 	}
 
 	#add-info {

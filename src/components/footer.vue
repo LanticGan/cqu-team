@@ -3,15 +3,15 @@
 		<div class="nav-list">
 			<router-link class="nav-item" ref="infoDom" to="/info">
 				<span id="homeImg"></span>
-				<span>信息</span>
+		
 			</router-link>
 			<router-link class="nav-item" to="/team">
 				<span id="teamImg"></span>
-				<span>团队</span>
+	
 			</router-link>
 			<router-link class="nav-item" to="/mine">
 				<span id="mineImg"></span>
-				<span>我的</span>
+		
 			</router-link>
 		</div>
 	</div>
@@ -51,24 +51,24 @@
 					vertical-align: middle;
 				}
 				#teamImg {
-					background-image: url("../assets/img/team1.png");
+					background-image: url("../assets/img/team-black.png");
 					background-size: 100%;
-					width: 24px;
-					height: 24px;
+					width: 30px;
+					height: 30px;
 					display: inline-block;
 				}
 				#homeImg {
-					background-image: url("../assets/img/home1.png");
+					background-image: url("../assets/img/home-black.png");
 					background-size: 100%;
-					width: 24px;
-					height: 24px;
+					width: 30px;
+					height: 30px;
 					display: inline-block;
 				}
 				#mineImg {
-					background-image: url("../assets/img/mine1.png");
+					background-image: url("../assets/img/mine-black.png");
 					background-size: 100%;
-					width: 24px;
-					height: 24px;
+					width: 30px;
+					height: 30px;
 					display: inline-block;
 				}
  			}
@@ -76,8 +76,6 @@
 	}
 
 	.router-link-active {
-		background: rgba(251, 70, 81, 0.1);
-		color: #f8767e !important;
 		#homeImg {
 			background-image: url("../assets/img/home2.png") !important;
 				}
@@ -85,7 +83,7 @@
 			background-image: url("../assets/img/team2.png") !important;
 		}
 		#mineImg {
-			background-image: url("../assets/img/mine2.png") !important;
+			background-image: url("../assets/img/mine-red.png") !important;
 		}
 	}
 
