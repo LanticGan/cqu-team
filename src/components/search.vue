@@ -1,9 +1,8 @@
 <template>
-<div>
 	<div class="bar" id="searchBar">
 		<form @submit.prevent="onSubmit">
 			<div class= "search-bar__box" :class="{ 'active': isSearching }">
-				<input v-model="conditions" type="text" id="search-input" class="search-bar__input" :placeholder="inputHolder">
+				<input v-model="filter1" type="text" id="search-input" class="search-bar__input" :placeholder="inputHolder">
 				<label @click="searching" id="search-text" for="search-input">
 					<img src="../assets/img/search3.png">
 					<span id="searchM">搜索</span>
@@ -12,11 +11,8 @@
 			</div>
 		</form>
     </div>
-    <content-list :filter1="filter1"></content-list>
-</div>
 </template>
 <script>
-	import contentList from '../views/content-list.vue'
 	export default {
 		name: 'searchBar',
 		data: function () {
@@ -40,9 +36,6 @@
 				
 			}
 		},
-		components: {
-			contentList
-		}
 	}
 </script>
 <style lang="scss">

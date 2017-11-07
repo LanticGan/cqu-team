@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import info from './views/info.vue'
 import contentBlock from './views/content-block.vue'
-import searchBar from './components/search.vue'
+import team from './components/team.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -22,8 +22,8 @@ export default new Router({
 			props: true,
 		},
 		{
-			path: '/search',
-			component: searchBar,
+			path: '/team',
+			component: team,
 		}
 	]
 })

@@ -5,9 +5,9 @@
 				<span id="homeImg"></span>
 				<span>信息</span>
 			</router-link>
-			<router-link class="nav-item" to="/search">
-				<span id="searchImg"></span>
-				<span>搜索</span>
+			<router-link class="nav-item" to="/team">
+				<span id="teamImg"></span>
+				<span>团队</span>
 			</router-link>
 			<router-link class="nav-item" to="/mine">
 				<span id="mineImg"></span>
@@ -50,8 +50,8 @@
 				& * {
 					vertical-align: middle;
 				}
-				#searchImg {
-					background-image: url("../assets/img/search1.png");
+				#teamImg {
+					background-image: url("../assets/img/team1.png");
 					background-size: 100%;
 					width: 24px;
 					height: 24px;
@@ -81,8 +81,8 @@
 		#homeImg {
 			background-image: url("../assets/img/home2.png") !important;
 				}
-		#searchImg {
-			background-image: url("../assets/img/search2.png") !important;
+		#teamImg {
+			background-image: url("../assets/img/team2.png") !important;
 		}
 		#mineImg {
 			background-image: url("../assets/img/mine2.png") !important;
