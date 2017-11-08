@@ -2,16 +2,24 @@
 	<div id="footer">
 		<div class="nav-list">
 			<router-link class="nav-item" ref="infoDom" to="/info">
-				<span id="homeImg"></span>
+				<div class="item-block">
+					<span id="homeImg"></span>
+					<span class="item-text">信息</span>
+				</div>
 		
 			</router-link>
 			<router-link class="nav-item" to="/team">
-				<span id="teamImg"></span>
+				<div class="item-block">
+					<span id="teamImg"></span>
+					<span class="item-text">团队</span>
+				</div>
 	
 			</router-link>
-			<router-link class="nav-item" to="/mine">
-				<span id="mineImg"></span>
-		
+			<router-link class="nav-item" to="/person">
+				<div class="item-block">
+					<span id="mineImg"></span>
+					<span class="item-text">个人</span>
+				</div>
 			</router-link>
 		</div>
 	</div>
@@ -28,12 +36,13 @@
 
 <style lang="scss">
 
-	$footHeight: 2.8em;
+	$footHeight: 3em;
 
 	#footer {
 		position: fixed;
 		bottom: 0;
-		background: #f6f6f6;
+		background: #fff;
+		border-top: solid 1px #d9d7d8;
 		width: 100%;
 		height: $footHeight;
 		.nav-list {
@@ -41,41 +50,47 @@
 			display: flex;
 			.nav-item {
 				height:100%;
-				line-height: $footHeight;
 				text-decoration: none;
-				color: #c2cfcc;
+				color: #2c2c2c;
 				display: block; 
 				flex: 1;
 				text-align: center;
-				& * {
-					vertical-align: middle;
-				}
-				#teamImg {
-					background-image: url("../assets/img/team-black.png");
-					background-size: 100%;
-					width: 30px;
-					height: 30px;
-					display: inline-block;
-				}
-				#homeImg {
-					background-image: url("../assets/img/home-black.png");
-					background-size: 100%;
-					width: 30px;
-					height: 30px;
-					display: inline-block;
-				}
-				#mineImg {
-					background-image: url("../assets/img/mine-black.png");
-					background-size: 100%;
-					width: 30px;
-					height: 30px;
-					display: inline-block;
-				}
- 			}
+				padding-top: 3px;
+			}
 		}
 	}
 
+	.item-block {
+		font-size:12px;
+		.item-text{
+			display: block;
+		}
+		#teamImg {
+			background-image: url("../assets/img/team-black.png");
+			background-size: 100%;
+			width: 26px;
+			height: 26px;
+			display: inline-block;
+		}
+		#homeImg {
+			background-image: url("../assets/img/home-black.png");
+			background-size: 100%;
+			width: 26px;
+			height: 26px;
+			display: inline-block;
+		}
+		#mineImg {
+			background-image: url("../assets/img/mine-black.png");
+			background-size: 100%;
+			width: 26px;
+			height: 26px;
+			display: inline-block;
+		}
+	}
+ 			
+
 	.router-link-active {
+		color: #fb4651 !important;
 		#homeImg {
 			background-image: url("../assets/img/home2.png") !important;
 				}
