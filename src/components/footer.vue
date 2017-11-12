@@ -4,14 +4,14 @@
 			<router-link class="nav-item" ref="infoDom" to="/info">
 				<div class="item-block">
 					<span id="homeImg"></span>
-					<span class="item-text">信息</span>
+					<span class="item-text">咨询</span>
 				</div>
 		
 			</router-link>
 			<router-link class="nav-item" to="/team">
 				<div class="item-block">
 					<span id="teamImg"></span>
-					<span class="item-text">团队</span>
+					<span class="item-text">组队</span>
 				</div>
 	
 			</router-link>

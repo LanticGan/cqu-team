@@ -1,35 +1,19 @@
 <template>
 	<div id="info">
-		<!-- <div id="filter-box">
-			<select v-model="filter.filter1" name="" id="">
-				<option value="test1">test1</option>
-				<option value="test2">test2</option>
-			</select>
-			<select v-model="filter.filter2" name="" id="">
-				<option value="test">test</option>
-			</select>
-		</div> -->
 		<search-bar></search-bar>
-	 	<content-list v-bind="filter"></content-list>
  	</div>
 </template>
 
 <script>
-	import contentList from './content-list.vue'
 	import searchBar from '../components/search.vue'
 	export default {
 		name: 'info',
 		data () {
 			return {
-				filter: {
-					filter1: "",
-					filter2: "",
-				}
 			}
 		},
 		components: {
 			searchBar,
-			contentList,
 		}
 	}
 </script>

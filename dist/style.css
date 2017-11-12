@@ -100,13 +100,6 @@
     color: #f8767e;
 }
 
-.content-item {
-  padding: 1em;
-  height: 10em;
-  border-bottom: 1px solid #e8e8e8;
-  display: block;
-}
-
 #searchBar {
   position: relative;
   background: #EFEFF4;
@@ -178,6 +171,57 @@
 
 
 
+
+.content-list {
+  margin-bottom: 2em;
+}
+.content-item {
+  padding: 0.5em;
+  border-bottom: 1px solid #e8e8e8;
+  display: block;
+  text-decoration: none;
+}
+.content-item .c-item-block {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #000;
+    height: 5.9em;
+}
+.content-item .c-item-block .c-user-info {
+      overflow: hidden;
+      width: 25%;
+      text-align: center;
+}
+.content-item .c-item-block .competition-info {
+      height: 5em;
+      width: 75%;
+}
+.content-item .c-item-block .competition-info p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 12px;
+}
+.content-item .c-item-block .competition-info .c-title {
+        height: 1.2em;
+        font-size: 1.2em;
+        font-weight: 400;
+}
+.content-item .c-item-block .competition-info .c-des {
+        height: 2.2em;
+        font-size: 1em;
+        color: #777;
+}
+.content-item .c-item-block .c-avater {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 0.6em auto;
+}
+.content-item .c-item-block .c-avater img {
+        width: 100%;
+        border-radius: 50%;
+}
 
 .user-info {
   margin: 2em 0;
