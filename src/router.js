@@ -4,6 +4,7 @@ import info from './views/info.vue'
 import contentBlock from './views/content-block.vue'
 import team from './views/team.vue'
 import person from './views/person.vue'
+import post from './views/post.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -30,6 +31,10 @@ export default new Router({
 			path: '/person',
 			component: person,
 		},
+		{
+			path: '/post',
+			component: post
+		}
 
 	]
 })

@@ -26,4 +26,8 @@
 		height: 100%;
 		width: 100%;
 	}
+
+	body {
+		line-height: 1 !important;
+	}
 </style>

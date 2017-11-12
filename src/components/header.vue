@@ -1,8 +1,9 @@
 <template>
 	<div id="header">
 		<span>组队系统</span>
-		<div id="add-info">
-		</div>
+		<router-link to="/post">
+			<div id="add-info"></div>
+		</router-link>
 	</div>	
 </template>
 

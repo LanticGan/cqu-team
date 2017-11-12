@@ -8651,6 +8651,7 @@ if (false) {(function () {
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'header',
@@ -8669,20 +8670,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "header" } }, [
+  return _c(
+    "div",
+    { attrs: { id: "header" } },
+    [
       _c("span", [_vm._v("组队系统")]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "add-info" } })
-    ])
-  }
-]
+      _c("router-link", { attrs: { to: "/post" } }, [
+        _c("div", { attrs: { id: "add-info" } })
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
@@ -8900,6 +8901,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__views_content_block_vue__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__views_team_vue__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__views_person_vue__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_post_vue__ = __webpack_require__(47);
+
 
 
 
@@ -8932,6 +8935,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */].use(__WEBPACK_IMPORTED_MODU
 			path: '/person',
 			component: __WEBPACK_IMPORTED_MODULE_5__views_person_vue__["a" /* default */],
 		},
+		{
+			path: '/post',
+			component: __WEBPACK_IMPORTED_MODULE_6__views_post_vue__["a" /* default */]
+		}
 
 	]
 }));
@@ -11897,10 +11904,34 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'contentBlock',
-	props: ["contentId"],
+	props: {
+		contentId: {
+			required: true,
+		},
+		title: {
+			default: 'AAA',
+		},
+		competitionName: {
+			default: 'xxx',
+		},
+		competitionTime: {
+			default: 'xxx-xx-xx',
+		},
+		description: {
+			default: 'AAA',
+		}
+	},
 	data: function () {
 		return {}
 	},
@@ -11916,7 +11947,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n\t" + _vm._s(_vm.contentId) + "\n")])
+  return _c("article", { staticClass: "weui-article" }, [
+    _c("h1", [_vm._v(_vm._s(_vm.contentId))]),
+    _vm._v(" "),
+    _c("h2", [_vm._v("比赛名称")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.competitionName))]),
+    _vm._v(" "),
+    _c("h2", [_vm._v("比赛时间")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.competitionTime))]),
+    _vm._v(" "),
+    _c("h2", [_vm._v("简介")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.description))]),
+    _vm._v(" "),
+    _c("h2", [_vm._v("成员")])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12135,6 +12182,7 @@ if (false) {(function () {
 						name: 'content',
 						params: {
 							contentId: 1,
+							userName: '甘宇廷',
 						}
 					},
 				},
@@ -12148,6 +12196,7 @@ if (false) {(function () {
 						name: 'content',
 						params: {
 							contentId: 2,
+							userName: '杨华岚',
 						}
 					},
 				},
@@ -12161,6 +12210,8 @@ if (false) {(function () {
 						name: 'content',
 						params: {
 							contentId: 3,
+							userName: '甘宇廷',
+							description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 						}
 					},
 				},
@@ -12174,6 +12225,7 @@ if (false) {(function () {
 						name: 'content',
 						params: {
 							contentId: 4,
+							userName: '甘宇廷',
 						}
 					},
 				},
@@ -12422,6 +12474,236 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__.p + "src/favicon.b43fe7f.jpg";
+
+/***/ }),
+/* 47 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_post_vue__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ae31dd9_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_post_vue__ = __webpack_require__(50);
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(48)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+
+/* template */
+
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __WEBPACK_IMPORTED_MODULE_0__node_modules_vue_loader_lib_selector_type_script_index_0_bustCache_post_vue__["a" /* default */],
+  __WEBPACK_IMPORTED_MODULE_1__node_modules_vue_loader_lib_template_compiler_index_id_data_v_2ae31dd9_hasScoped_false_buble_transforms_node_modules_vue_loader_lib_selector_type_template_index_0_bustCache_post_vue__["a" /* default */],
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "src\\views\\post.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2ae31dd9", Component.options)
+  } else {
+    hotAPI.reload("data-v-2ae31dd9", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+/* harmony default export */ __webpack_exports__["a"] = (Component.exports);
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	data () {
+		return {
+			text: '',
+			maxLength: 200,
+		}
+	},
+	computed: {
+		disabled () {
+			return this.text.length == this.maxLength ? true : false
+		}
+	}
+});
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "form",
+    {
+      attrs: {
+        action: "",
+        method: "post",
+        enctype: "multipart/form-data",
+        id: "identify-form"
+      }
+    },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "weui-cell" }, [
+        _c("div", { staticClass: "weui-cell__bd" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.text,
+                expression: "text"
+              }
+            ],
+            staticClass: "weui-textarea",
+            attrs: { disabled: _vm.disabled, placeholder: "团队简介", rows: "3" },
+            domProps: { value: _vm.text },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.text = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "weui-textarea-counter" }, [
+            _c("span", [_vm._v(_vm._s(_vm.text.length))]),
+            _vm._v("/" + _vm._s(_vm.maxLength))
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(2)
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "weui-cell" }, [
+      _c("div", { staticClass: "weui-cell__hd" }, [
+        _c("label", { staticClass: "weui-label" }, [_vm._v("比赛名称")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "weui-cell__bd" }, [
+        _c("input", {
+          staticClass: "weui-input",
+          attrs: { placeholder: "请输入比赛名称" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "weui-cell" }, [
+      _c("div", { staticClass: "weui-cell__hd" }, [
+        _c("label", { staticClass: "weui-label", attrs: { for: "" } }, [
+          _vm._v("比赛时间")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "weui-cell__bd" }, [
+        _c("input", {
+          staticClass: "weui-input",
+          attrs: { type: "datetime-local", value: "", placeholder: "" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "post-btn" }, [
+      _c(
+        "a",
+        {
+          staticClass: "weui-btn weui-btn_plain-default",
+          attrs: { href: "javascript:;" }
+        },
+        [_vm._v("发布需求")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+var esExports = { render: render, staticRenderFns: staticRenderFns }
+/* harmony default export */ __webpack_exports__["a"] = (esExports);
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2ae31dd9", esExports)
+  }
+}
 
 /***/ })
 /******/ ]);
