@@ -1,12 +1,22 @@
 <template>
+<div>
 	<div id="tabbar">
 		<div id="time-sort" :class="{'tab-active': timeActive}" @click="timsIsActive">时间优先</div>
 		<div id="hot-sort" :class="{'tab-active': hotActive}" @click="hotIsActive">热度优先</div>
-		<div id="competition-type">比赛类型
-			<span class="down-arrow">
-			</span>
+		<div id="competition-type" @click="typeIsActive">比赛类型
+			<span class="default-arrow" :class="{'active-arrow' : typeActive}"></span>
 		</div>
 	</div>
+	<transition name="menu">
+		<div class="menu" id="type-menu" v-if="typeActive">
+			<div class="row" v-for="(row, rowIndex) in rows">
+				<div class="type-item" :class="{'item-active': (`${rowIndex}${itemIndex}` == activeItem)}" v-for="(item, itemIndex) in row.row" :key="item.id" @click="clickItem(`${rowIndex}${itemIndex}`,item.id)">
+					{{item.name}}
+				</div>
+			</div>
+		</div>
+	</transition>
+</div>
 </template>
 
 <script>
@@ -15,6 +25,51 @@
 			return {
 				timeActive: true,
 				hotActive: false,
+				typeActive: false,
+				activeItem: "00",
+				rows: [
+					{
+						row: [
+							{
+								id:"qb",
+								name: '全部',
+							},
+							{
+								id:"cy",
+								name: '创业大赛',
+							},
+							{
+								id:"gg",
+								name: '广告创意',
+							},
+							{
+								id:"xk",
+								name: '学科学术',
+							}
+						]
+					},
+					{
+						row: [
+							{
+								id:"xxcg",
+								name: '选秀唱歌',
+							},
+							{
+								id:"wxyj",
+								name: '文学演讲',
+							},
+							{
+								id:"yxch",
+								name: '营销策划',
+							},
+							{
+								id:"sjbs",
+								name: '设计比赛',
+							}
+						],
+					},
+				]
+				
 			}
 		},
 		methods: {
@@ -28,8 +83,14 @@
 				this.hotActive = true
 				this.timeActive = false
 			},
-
-		}
+			clickItem (index, content) {
+				// send message to team.vue
+				this.activeItem = index
+			},
+			typeIsActive () {
+				this.typeActive = !this.typeActive
+			}
+		},
 	}
 </script>
 
@@ -48,11 +109,11 @@
 	}
 
 	.tab-active {
-		color: #fb7154 !important;
+		color: #fb4651 !important;
 	}
 
 	#competition-type {
-		.down-arrow {
+		.default-arrow {
 			display: inline-block;
 			width:24px;
 			height:26px;
@@ -62,5 +123,43 @@
 			vertical-align:middle;
 	
 		}
+
+		.active-arrow {
+			background-image: url(../assets/img/up-arrow.png) !important;
+		}
+	}
+
+
+	$type-item-height: 1.5em;
+	.hidden {
+		display: none;
+	}
+	.menu {
+		position: relative;
+		.row {
+			display: flex;
+			.type-item {
+				flex: 1;
+				text-align: center;
+				margin: 10px 6px;
+				height: $type-item-height;
+				line-height: $type-item-height;
+				border:1px solid #E5E5E5;
+				border-radius:5px;
+				padding:5px;
+			}
+		}
+		.item-active {
+			border: 1px solid #fb4651 !important;
+			color: #fb4651 !important;
+		}
+	}
+
+	/*menu trnsition*/
+	.menu-enter-active, .menu-leave-active {
+  		transition: opacity .5s
+	}
+	.menu-enter, .menu-leave-to {
+  		opacity: 0
 	}
 </style>

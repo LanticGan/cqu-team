@@ -12393,12 +12393,67 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	data () {
 		return {
 			timeActive: true,
 			hotActive: false,
+			typeActive: false,
+			activeItem: "00",
+			rows: [
+				{
+					row: [
+						{
+							id:"qb",
+							name: '全部',
+						},
+						{
+							id:"cy",
+							name: '创业大赛',
+						},
+						{
+							id:"gg",
+							name: '广告创意',
+						},
+						{
+							id:"xk",
+							name: '学科学术',
+						}
+					]
+				},
+				{
+					row: [
+						{
+							id:"xxcg",
+							name: '选秀唱歌',
+						},
+						{
+							id:"wxyj",
+							name: '文学演讲',
+						},
+						{
+							id:"yxch",
+							name: '营销策划',
+						},
+						{
+							id:"sjbs",
+							name: '设计比赛',
+						}
+					],
+				},
+			]
+			
 		}
 	},
 	methods: {
@@ -12412,8 +12467,14 @@ if (false) {(function () {
 			this.hotActive = true
 			this.timeActive = false
 		},
-
-	}
+		clickItem (index, content) {
+			// send message to team.vue
+			this.activeItem = index
+		},
+		typeIsActive () {
+			this.typeActive = !this.typeActive
+		}
+	},
 });
 
 
@@ -12426,41 +12487,88 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "tabbar" } }, [
-    _c(
-      "div",
-      {
-        class: { "tab-active": _vm.timeActive },
-        attrs: { id: "time-sort" },
-        on: { click: _vm.timsIsActive }
-      },
-      [_vm._v("时间优先")]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        class: { "tab-active": _vm.hotActive },
-        attrs: { id: "hot-sort" },
-        on: { click: _vm.hotIsActive }
-      },
-      [_vm._v("热度优先")]
-    ),
-    _vm._v(" "),
-    _vm._m(0)
-  ])
+  return _c(
+    "div",
+    [
+      _c("div", { attrs: { id: "tabbar" } }, [
+        _c(
+          "div",
+          {
+            class: { "tab-active": _vm.timeActive },
+            attrs: { id: "time-sort" },
+            on: { click: _vm.timsIsActive }
+          },
+          [_vm._v("时间优先")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            class: { "tab-active": _vm.hotActive },
+            attrs: { id: "hot-sort" },
+            on: { click: _vm.hotIsActive }
+          },
+          [_vm._v("热度优先")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            attrs: { id: "competition-type" },
+            on: { click: _vm.typeIsActive }
+          },
+          [
+            _vm._v("比赛类型\r\n\t\t\t"),
+            _c("span", {
+              staticClass: "default-arrow",
+              class: { "active-arrow": _vm.typeActive }
+            })
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("transition", { attrs: { name: "menu" } }, [
+        _vm.typeActive
+          ? _c(
+              "div",
+              { staticClass: "menu", attrs: { id: "type-menu" } },
+              _vm._l(_vm.rows, function(row, rowIndex) {
+                return _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(row.row, function(item, itemIndex) {
+                    return _c(
+                      "div",
+                      {
+                        key: item.id,
+                        staticClass: "type-item",
+                        class: {
+                          "item-active":
+                            "" + rowIndex + itemIndex == _vm.activeItem
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.clickItem("" + rowIndex + itemIndex, item.id)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n\t\t\t\t\t" + _vm._s(item.name) + "\r\n\t\t\t\t"
+                        )
+                      ]
+                    )
+                  })
+                )
+              })
+            )
+          : _vm._e()
+      ])
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "competition-type" } }, [
-      _vm._v("比赛类型\n\t\t"),
-      _c("span", { staticClass: "down-arrow" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);
