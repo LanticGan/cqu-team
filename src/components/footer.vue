@@ -4,7 +4,7 @@
 			<router-link class="nav-item" ref="infoDom" to="/info">
 				<div class="item-block">
 					<span id="homeImg"></span>
-					<span class="item-text">咨询</span>
+					<span class="item-text">资讯</span>
 				</div>
 		
 			</router-link>
