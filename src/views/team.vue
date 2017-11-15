@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<search-bar></search-bar>
+		<search-bar @searchActive="getFilter"></search-bar>
 		<tabBar @filterActive="getFilter"></tabBar>
 		<content-list v-bind="filter"></content-list>
 	</div>

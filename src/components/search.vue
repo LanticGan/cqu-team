@@ -31,9 +31,8 @@
 				this.isSearching = false
 				this.inputHolder = ''
 			},
-			onSubmit: function (event) {
-				event.preventDefault();
-				
+			onSubmit: function () {
+				this.$emit("searchActive", this.filter1)
 			}
 		},
 	}

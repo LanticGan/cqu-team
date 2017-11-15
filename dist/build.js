@@ -11705,9 +11705,8 @@ if (false) {(function () {
 			this.isSearching = false
 			this.inputHolder = ''
 		},
-		onSubmit: function (event) {
-			event.preventDefault();
-			
+		onSubmit: function () {
+			this.$emit("searchActive", this.filter1)
 		}
 	},
 });
@@ -12605,7 +12604,7 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("search-bar"),
+      _c("search-bar", { on: { searchActive: _vm.getFilter } }),
       _vm._v(" "),
       _c("tabBar", { on: { filterActive: _vm.getFilter } }),
       _vm._v(" "),
