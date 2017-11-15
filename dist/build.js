@@ -12067,11 +12067,16 @@ if (false) {(function () {
 			}
 		}
 	},
+	methods: {
+		getFilter (val) {
+			console.log(val)
+		}
+	},
 	components: {
 		searchBar: __WEBPACK_IMPORTED_MODULE_1__components_search_vue__["a" /* default */],
 		contentList: __WEBPACK_IMPORTED_MODULE_0__content_list_vue__["a" /* default */],
 		tabBar: __WEBPACK_IMPORTED_MODULE_2__components_tabbar_vue__["a" /* default */],
-	}
+	},
 });
 
 
@@ -12459,6 +12464,7 @@ if (false) {(function () {
 	methods: {
 		timsIsActive () {
 			// send message to team.vue
+			this.$emit('filterActive', 'hhh')
 			this.timeActive = true
 			this.hotActive = false
 		},
@@ -12528,41 +12534,49 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("transition", { attrs: { name: "menu" } }, [
-        _vm.typeActive
-          ? _c(
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.typeActive,
+                expression: "typeActive"
+              }
+            ],
+            staticClass: "menu",
+            attrs: { id: "type-menu" }
+          },
+          _vm._l(_vm.rows, function(row, rowIndex) {
+            return _c(
               "div",
-              { staticClass: "menu", attrs: { id: "type-menu" } },
-              _vm._l(_vm.rows, function(row, rowIndex) {
+              { staticClass: "row" },
+              _vm._l(row.row, function(item, itemIndex) {
                 return _c(
                   "div",
-                  { staticClass: "row" },
-                  _vm._l(row.row, function(item, itemIndex) {
-                    return _c(
-                      "div",
-                      {
-                        key: item.id,
-                        staticClass: "type-item",
-                        class: {
-                          "item-active":
-                            "" + rowIndex + itemIndex == _vm.activeItem
-                        },
-                        on: {
-                          click: function($event) {
-                            _vm.clickItem("" + rowIndex + itemIndex, item.id)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n\t\t\t\t\t" + _vm._s(item.name) + "\r\n\t\t\t\t"
-                        )
-                      ]
+                  {
+                    key: item.id,
+                    staticClass: "type-item",
+                    class: {
+                      "item-active": "" + rowIndex + itemIndex == _vm.activeItem
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.clickItem("" + rowIndex + itemIndex, item.id)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n\t\t\t\t\t" + _vm._s(item.name) + "\r\n\t\t\t\t"
                     )
-                  })
+                  ]
                 )
               })
             )
-          : _vm._e()
+          })
+        )
       ])
     ],
     1
@@ -12593,7 +12607,7 @@ var render = function() {
     [
       _c("search-bar"),
       _vm._v(" "),
-      _c("tabBar"),
+      _c("tabBar", { on: { filterActive: _vm.getFilter } }),
       _vm._v(" "),
       _c("content-list", _vm._b({}, "content-list", _vm.filter, false))
     ],

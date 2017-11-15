@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	<transition name="menu">
-		<div class="menu" id="type-menu" v-if="typeActive">
+		<div class="menu" id="type-menu" v-show="typeActive">
 			<div class="row" v-for="(row, rowIndex) in rows">
 				<div class="type-item" :class="{'item-active': (`${rowIndex}${itemIndex}` == activeItem)}" v-for="(item, itemIndex) in row.row" :key="item.id" @click="clickItem(`${rowIndex}${itemIndex}`,item.id)">
 					{{item.name}}
@@ -75,6 +75,7 @@
 		methods: {
 			timsIsActive () {
 				// send message to team.vue
+				this.$emit('filterActive', 'hhh')
 				this.timeActive = true
 				this.hotActive = false
 			},
@@ -155,11 +156,12 @@
 		}
 	}
 
-	/*menu trnsition*/
-	.menu-enter-active, .menu-leave-active {
-  		transition: opacity .5s
+	.menu-enter-active {
+		transition: opacity .6s;
 	}
-	.menu-enter, .menu-leave-to {
-  		opacity: 0
+
+	.menu-enter {
+		opacity: 0;
+
 	}
 </style>

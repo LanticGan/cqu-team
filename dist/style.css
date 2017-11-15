@@ -277,12 +277,10 @@ body {
     border: 1px solid #fb4651 !important;
     color: #fb4651 !important;
 }
-
-/*menu trnsition*/
-.menu-enter-active, .menu-leave-active {
-  transition: opacity .5s;
+.menu-enter-active {
+  transition: opacity .6s;
 }
-.menu-enter, .menu-leave-to {
+.menu-enter {
   opacity: 0;
 }
 

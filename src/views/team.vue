@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<search-bar></search-bar>
-		<tabBar></tabBar>
+		<tabBar @filterActive="getFilter"></tabBar>
 		<content-list v-bind="filter"></content-list>
 	</div>
 </template>
@@ -20,11 +20,16 @@
 				}
 			}
 		},
+		methods: {
+			getFilter (val) {
+				console.log(val)
+			}
+		},
 		components: {
 			searchBar,
 			contentList,
 			tabBar,
-		}
+		},
 	}
 </script>
 
