@@ -1,11 +1,15 @@
 <template>
 	<div id="info">
 		<search-bar></search-bar>
+		<tab-bar></tab-bar>
+		<competition-list></competition-list>
  	</div>
 </template>
 
 <script>
 	import searchBar from '../components/search.vue'
+	import tabBar from '../components/tabbar.vue'
+	import competitionList from './competition-list.vue'
 	export default {
 		name: 'info',
 		data () {
@@ -14,6 +18,8 @@
 		},
 		components: {
 			searchBar,
+			tabBar,
+			competitionList,
 		}
 	}
 </script>

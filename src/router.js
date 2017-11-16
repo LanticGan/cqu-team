@@ -5,6 +5,7 @@ import contentBlock from './views/content-block.vue'
 import team from './views/team.vue'
 import person from './views/person.vue'
 import post from './views/post.vue'
+import competition from './views/competition.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -34,7 +35,13 @@ export default new Router({
 		{
 			path: '/post',
 			component: post
-		}
+		},
+		{
+			name: 'competition',
+			path: '/competition/:competitionId',
+			component: competition,
+			props: true,
+		},
 
 	]
 })
