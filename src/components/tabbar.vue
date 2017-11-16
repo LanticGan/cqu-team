@@ -157,7 +157,7 @@
 	}
 
 	.menu-enter-active {
-		transition: opacity .6s;
+		transition: all .6s;
 	}
 
 	.menu-enter {
