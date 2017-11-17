@@ -13161,7 +13161,7 @@ if (false) {(function () {
 			console.log(this.title, this.type, this.text, this.deadline)
 		},
 		showSelect () {
-			this.selectTeammates = true
+			this.showTeammatesSelect = true
 		},
 	},
 	computed: {
@@ -13261,15 +13261,36 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	data () {
-		return {}
+		return {
+			users: [
+				{
+					userName: '甘宇廷',
+					userAvatar: '/src/assets/img/test-avatar.png',
+					userDes: '66666666666666666666666666666666666',
+					userSelected: false
+				},
+				{
+					userName: '姚裕欣',
+					userAvatar: '/src/assets/img/test-avatar.png',
+					userDes: '66666666666666666666666666666666666',
+					userSelected: false
+				}
+			]
+		}
 	},
 	methods: {
 		cancel () {
 			this.$emit("cancelSelect")
+		},
+		consoleTest () {
+			console.log(this.user1)
 		}
 	},
 	components: {
@@ -13293,37 +13314,44 @@ var render = function() {
     [
       _c("searchBar"),
       _vm._v(" "),
-      _vm._m(0),
+      _vm._l(_vm.users, function(user) {
+        return _c("div", { staticClass: "m-item-block" }, [
+          _c("div", { staticClass: "m-user-info" }, [
+            _c("div", { staticClass: "m-avater" }, [
+              _c("img", { attrs: { src: user.userAvatar, alt: "avatar" } })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "m-resume" }, [
+            _c("p", { staticClass: "m-title" }, [
+              _vm._v(_vm._s(user.userName))
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "m-des" }, [_vm._v(_vm._s(user.userDes))])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "checkbox",
+              class: { "m-select": user.userSelected },
+              on: {
+                click: function($event) {
+                  user.userSelected = !user.userSelected
+                }
+              }
+            },
+            [_c("input", { attrs: { type: "checkbox", name: "checkbox1" } })]
+          )
+        ])
+      }),
       _vm._v(" "),
       _c("div", { on: { click: _vm.cancel } }, [_vm._v("取消")])
     ],
-    1
+    2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "m-item-block" }, [
-      _c("div", { staticClass: "m-user-info" }, [
-        _c("div", { staticClass: "m-avater" }, [
-          _c("img", {
-            attrs: { src: "/src/assets/img/test-avatar.png", alt: "avatar" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "m-resume" }, [
-        _c("p", { staticClass: "m-title" }, [_vm._v("甘宇廷")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "m-des" }, [
-          _vm._v("66666666666666666666666666666666666")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 var esExports = { render: render, staticRenderFns: staticRenderFns }
 /* harmony default export */ __webpack_exports__["a"] = (esExports);

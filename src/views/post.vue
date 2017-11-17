@@ -94,7 +94,7 @@
 				console.log(this.title, this.type, this.text, this.deadline)
 			},
 			showSelect () {
-				this.selectTeammates = true
+				this.showTeammatesSelect = true
 			},
 		},
 		computed: {

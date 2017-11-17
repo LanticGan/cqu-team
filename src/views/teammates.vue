@@ -1,16 +1,19 @@
 <template>
 	<div class="team-members-search">
 		<searchBar></searchBar>
-		<div class="m-item-block">
+		<div class="m-item-block" v-for="user in users">
 			<div class="m-user-info">
 				<div class="m-avater">
-					<img src="/src/assets/img/test-avatar.png" alt="avatar">
+					<img :src="user.userAvatar" alt="avatar">
 				</div>
 			</div>
 			<div class="m-resume">
-				<p class="m-title">甘宇廷</p>
-				<p class="m-des">66666666666666666666666666666666666</p>
+				<p class="m-title">{{user.userName}}</p>
+				<p class="m-des">{{user.userDes}}</p>
 			</div>
+			<div class="checkbox" :class="{'m-select' : user.userSelected}" @click="user.userSelected = !user.userSelected" >
+        		<input type="checkbox" name="checkbox1">
+        	</div>
 		</div>
 		<div @click="cancel">取消</div>
 	</div>
@@ -20,11 +23,29 @@
 	import searchBar from '../components/search.vue'
 	export default {
 		data () {
-			return {}
+			return {
+				users: [
+					{
+						userName: '甘宇廷',
+						userAvatar: '/src/assets/img/test-avatar.png',
+						userDes: '66666666666666666666666666666666666',
+						userSelected: false
+					},
+					{
+						userName: '姚裕欣',
+						userAvatar: '/src/assets/img/test-avatar.png',
+						userDes: '66666666666666666666666666666666666',
+						userSelected: false
+					}
+				]
+			}
 		},
 		methods: {
 			cancel () {
 				this.$emit("cancelSelect")
+			},
+			consoleTest () {
+				console.log(this.user1)
 			}
 		},
 		components: {
@@ -50,9 +71,8 @@
 			align-items: center;
 			font-size: 14px;
 			color: #000;
-			height:5.9em;
 			padding: 10px;
-			border-bottom: 1px solid #efefef;
+			border-bottom: 1px solid #e1e1e1;
 			.m-user-info {
 				overflow: hidden;
 				width: 20%;
@@ -61,6 +81,7 @@
 			.m-resume {
 				height: 5em;
 				width:60%;
+				margin-right:2em;
 				p {
 					white-space:nowrap; 
 					overflow: hidden;
@@ -88,5 +109,24 @@
 				}
 			}
 		}
+
+		.checkbox {
+			width:28px;
+			height: 28px;
+			background: #fff;
+			border-radius: 50%;
+			border: 1px solid #C9C9C9;
+			box-sizing: border-box;
+			input {
+				visibility: hidden;
+			}
+		}
 	
+		.m-select {
+			background-image: url(../assets/img/selected.png);
+			background-size: 28px;
+			background-position: 0;
+			border: 1px solid #fb4651;
+		}
+
 </style>
