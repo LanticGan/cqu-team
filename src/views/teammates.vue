@@ -15,7 +15,15 @@
         		<input type="checkbox" name="checkbox1">
         	</div>
 		</div>
-		<div @click="cancel">取消</div>
+
+		<div class="m-btn">
+			<div class="m-cancel-btn"　@click="cancel">
+				取消
+			</div>
+			<div class="m-confirm-btn" @click="confirm">
+				确认
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -26,14 +34,16 @@
 			return {
 				users: [
 					{
+						userId: 1,
 						userName: '甘宇廷',
-						userAvatar: '/src/assets/img/test-avatar.png',
+						userAvatar: '../assets/img/test-avatar.png',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					},
 					{
+						userId: 2,
 						userName: '姚裕欣',
-						userAvatar: '/src/assets/img/test-avatar.png',
+						userAvatar: '../assets/img/test-avatar.png',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					}
@@ -41,11 +51,21 @@
 			}
 		},
 		methods: {
+
+			// Cancel select-teammates action
 			cancel () {
 				this.$emit("cancelSelect")
 			},
-			consoleTest () {
-				console.log(this.user1)
+
+			// Confirm select-teammates action
+			confirm () {
+				let selectedUserAvatarList = [];
+				this.users.forEach((user) => {
+					if (user.userSelected) {
+						selectedUserAvatarList.push(user)
+					}
+				})
+				this.$emit("confirmSelect", selectedUserAvatarList)
 			}
 		},
 		components: {
@@ -129,4 +149,27 @@
 			border: 1px solid #fb4651;
 		}
 
+		.m-btn {
+			margin-top: 20px;
+			display: flex;
+			justify-content: center;
+			div {
+				width: 4em;
+				height: 1.4em;
+				line-height: 1.4em;
+				border-radius: 5px;
+				text-align: center;
+				padding: 4px 8px;
+				margin:5px 10px;;
+			}
+			.m-cancel-btn {
+				border: 1px solid rgba(53, 53, 53, 0.6);;
+				color: rgba(53, 53, 53, 0.6);
+			}
+			.m-confirm-btn {
+				color: #fff;
+    			background-color: #fb7079;
+    			border: 1px solid #fb7079;
+			}
+		}
 </style>

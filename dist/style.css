@@ -386,6 +386,18 @@ body {
 .teammates-enter, .teammates-leave-to {
   transform: translateX(-100%);
 }
+.team-members {
+  display: flex;
+}
+.team-members .team-member-item {
+    margin: 5px;
+    width: 36px;
+    height: 36px;
+}
+.team-members .team-member-item img {
+      width: 100%;
+      height: 100%;
+}
 
 .team-members-search {
   background: #fff;
@@ -455,4 +467,27 @@ body {
   background-size: 28px;
   background-position: 0;
   border: 1px solid #fb4651;
+}
+.m-btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.m-btn div {
+    width: 4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    border-radius: 5px;
+    text-align: center;
+    padding: 4px 8px;
+    margin: 5px 10px;
+}
+.m-btn .m-cancel-btn {
+    border: 1px solid rgba(53, 53, 53, 0.6);
+    color: rgba(53, 53, 53, 0.6);
+}
+.m-btn .m-confirm-btn {
+    color: #fff;
+    background-color: #fb7079;
+    border: 1px solid #fb7079;
 }

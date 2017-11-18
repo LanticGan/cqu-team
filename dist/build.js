@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/dist/";
+/******/ 	__webpack_require__.p = "/dist/src";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 6);
@@ -12198,7 +12198,7 @@ if (false) {(function () {
 				{
 					id:1,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊，求编程大佬一枚三缺一，啊啊啊，求编程大佬一枚三缺一，啊啊啊',
 					url: {
@@ -12212,7 +12212,7 @@ if (false) {(function () {
 				{
 					id:2,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12226,7 +12226,7 @@ if (false) {(function () {
 				{
 					id:3,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12240,7 +12240,7 @@ if (false) {(function () {
 				{
 					id:4,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12695,7 +12695,7 @@ if (false) {(function () {
 				{
 					id:1,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12709,7 +12709,7 @@ if (false) {(function () {
 				{
 					id:2,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12723,7 +12723,7 @@ if (false) {(function () {
 				{
 					id:3,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12738,7 +12738,7 @@ if (false) {(function () {
 				{
 					id:4,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12752,7 +12752,7 @@ if (false) {(function () {
 				{
 					id:5,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -12765,7 +12765,7 @@ if (false) {(function () {
 				{
 					id:6,
 					username: '甘宇廷',
-					avatar: '/src/assets/img/test-avatar.png',
+					avatar: '../assets/img/test-avatar.png',
 					title: '计算机设计大赛',
 					description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 					url: {
@@ -13111,6 +13111,12 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13121,11 +13127,13 @@ if (false) {(function () {
 			deadline: '',
 			text: '',
 			maxLength: 200,
-			type: '',
+			type: '应用开发',
 			showTeammatesSelect: false,
+			teammates: [],
 		}
 	},
 	methods: {
+		// Use weui.js, help us to realize the Picker. 
 		typePicker () {
 			let $vue = this
 			weui.picker([
@@ -13157,17 +13165,31 @@ if (false) {(function () {
 			   id: 'singleLinePicker'
 			});
 		},
+
+		// test
 		postData () {
 			console.log(this.title, this.type, this.text, this.deadline)
 		},
+
+		// Show teammates components 
 		showSelect () {
 			this.showTeammatesSelect = true
 		},
+
+		addTeammates (teammates) {
+			console.log(teammates)
+			this.teammates = teammates
+			this.showTeammatesSelect = false
+		}
+
 	},
 	computed: {
+
+		// Control the length of description
 		disabled () {
 			return this.text.length == this.maxLength ? true : false
 		}
+
 	},
 	components: {
 		searchBar: __WEBPACK_IMPORTED_MODULE_0__components_search_vue__["a" /* default */],
@@ -13264,6 +13286,14 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -13271,14 +13301,16 @@ if (false) {(function () {
 		return {
 			users: [
 				{
+					userId: 1,
 					userName: '甘宇廷',
-					userAvatar: '/src/assets/img/test-avatar.png',
+					userAvatar: '../assets/img/test-avatar.png',
 					userDes: '66666666666666666666666666666666666',
 					userSelected: false
 				},
 				{
+					userId: 2,
 					userName: '姚裕欣',
-					userAvatar: '/src/assets/img/test-avatar.png',
+					userAvatar: '../assets/img/test-avatar.png',
 					userDes: '66666666666666666666666666666666666',
 					userSelected: false
 				}
@@ -13286,11 +13318,21 @@ if (false) {(function () {
 		}
 	},
 	methods: {
+
+		// Cancel select-teammates action
 		cancel () {
 			this.$emit("cancelSelect")
 		},
-		consoleTest () {
-			console.log(this.user1)
+
+		// Confirm select-teammates action
+		confirm () {
+			let selectedUserAvatarList = [];
+			this.users.forEach((user) => {
+				if (user.userSelected) {
+					selectedUserAvatarList.push(user)
+				}
+			})
+			this.$emit("confirmSelect", selectedUserAvatarList)
 		}
 	},
 	components: {
@@ -13346,7 +13388,17 @@ var render = function() {
         ])
       }),
       _vm._v(" "),
-      _c("div", { on: { click: _vm.cancel } }, [_vm._v("取消")])
+      _c("div", { staticClass: "m-btn" }, [
+        _c("div", { staticClass: "m-cancel-btn", on: { click: _vm.cancel } }, [
+          _vm._v("\n\t\t\t\t取消\n\t\t\t")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "m-confirm-btn", on: { click: _vm.confirm } },
+          [_vm._v("\n\t\t\t\t确认\n\t\t\t")]
+        )
+      ])
     ],
     2
   )
@@ -13416,16 +13468,22 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "weui-cell", on: { click: _vm.typePicker } },
+            {
+              staticClass: "weui-cell",
+              staticStyle: {
+                height: "43.53px",
+                "box-sizing": "border-box",
+                "line-height": "23.525px"
+              },
+              on: { click: _vm.typePicker }
+            },
             [
               _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "weui-cell__bd" }, [
-                _c("input", {
-                  staticClass: "weui-input",
-                  attrs: { disabled: "disabled", placeholder: "请选择比赛类别" },
-                  domProps: { value: _vm.type }
-                })
+                _vm._v(
+                  "\n                " + _vm._s(_vm.type) + "\n            "
+                )
               ])
             ]
           ),
@@ -13470,7 +13528,11 @@ var render = function() {
               staticClass: "team-members",
               staticStyle: { "margin-left": "15px" }
             },
-            [_vm._v("aaa")]
+            _vm._l(_vm.teammates, function(member) {
+              return _c("div", { staticClass: "team-member-item" }, [
+                _c("img", { attrs: { src: member.userAvatar, alt: "" } })
+              ])
+            })
           ),
           _vm._v(" "),
           _c("div", { staticClass: "weui-cell" }, [
@@ -13537,7 +13599,8 @@ var render = function() {
             on: {
               cancelSelect: function($event) {
                 _vm.showTeammatesSelect = false
-              }
+              },
+              confirmSelect: _vm.addTeammates
             }
           })
         ],
@@ -13589,7 +13652,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "weui-cell__bd" }, [
       _c("input", {
         staticClass: "weui-input",
-        attrs: { type: "text", placeholder: "点击配置成员", disabled: "disabled" }
+        attrs: { type: "text", placeholder: "点击配置团队成员", disabled: "disabled" }
       })
     ])
   }

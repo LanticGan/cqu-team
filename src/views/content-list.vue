@@ -36,7 +36,7 @@
 					{
 						id:1,
 						username: '甘宇廷',
-						avatar: '/src/assets/img/test-avatar.png',
+						avatar: '../assets/img/test-avatar.png',
 						title: '计算机设计大赛',
 						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 						url: {
@@ -50,7 +50,7 @@
 					{
 						id:2,
 						username: '甘宇廷',
-						avatar: '/src/assets/img/test-avatar.png',
+						avatar: '../assets/img/test-avatar.png',
 						title: '计算机设计大赛',
 						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 						url: {
@@ -64,7 +64,7 @@
 					{
 						id:3,
 						username: '甘宇廷',
-						avatar: '/src/assets/img/test-avatar.png',
+						avatar: '../assets/img/test-avatar.png',
 						title: '计算机设计大赛',
 						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 						url: {
@@ -79,7 +79,7 @@
 					{
 						id:4,
 						username: '甘宇廷',
-						avatar: '/src/assets/img/test-avatar.png',
+						avatar: '../assets/img/test-avatar.png',
 						title: '计算机设计大赛',
 						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 						url: {
@@ -93,7 +93,7 @@
 					{
 						id:5,
 						username: '甘宇廷',
-						avatar: '/src/assets/img/test-avatar.png',
+						avatar: '../assets/img/test-avatar.png',
 						title: '计算机设计大赛',
 						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 						url: {
@@ -106,7 +106,7 @@
 					{
 						id:6,
 						username: '甘宇廷',
-						avatar: '/src/assets/img/test-avatar.png',
+						avatar: '../assets/img/test-avatar.png',
 						title: '计算机设计大赛',
 						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
 						url: {

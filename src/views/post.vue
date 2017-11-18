@@ -7,10 +7,12 @@
 	                <input v-model="title" class="weui-input"  placeholder="请输入比赛名称">
 	            </div>
 	        </div>
-	        <div class="weui-cell" @click="typePicker">
-	            <div class="weui-cell__hd"><label class="weui-label">比赛类别</label></div>
+	        <div class="weui-cell" @click="typePicker" style="height:43.53px; box-sizing: border-box; line-height:23.525px;">
+	            <div class="weui-cell__hd">
+	            	<label class="weui-label">比赛类别</label>
+	            </div>
 	            <div class="weui-cell__bd">
-	                <input class="weui-input"  :value="type" disabled="disabled" placeholder="请选择比赛类别">
+	                {{type}}
 	            </div>
 	        </div>
 	        <div class="weui-cell">
@@ -24,10 +26,14 @@
 	            	<label class="weui-label">团队成员</label>
 	            </div>
 	            <div class="weui-cell__bd">
-	                <input class="weui-input" type="text" placeholder="点击配置成员" disabled="disabled">
+	                <input class="weui-input" type="text" placeholder="点击配置团队成员" disabled="disabled">
 	             </div>
 	        </div>
-	        <div class="team-members" style="margin-left:15px;">aaa</div>
+	        <div class="team-members" style="margin-left:15px;">	
+		        <div class="team-member-item" v-for="member in teammates">
+		        		<img :src="member.userAvatar" alt="">
+		        </div>
+	        </div>
 	        <div class="weui-cell">
 	            <div class="weui-cell__bd">
 		            <textarea v-model="text" class="weui-textarea" :disabled="disabled" placeholder="请简单描述您的招募需求~" rows="3"></textarea>
@@ -39,7 +45,7 @@
 	        </div>
 		</form>
 		<transition name="teammates">
-			<teammates v-show="showTeammatesSelect" @cancelSelect="showTeammatesSelect = false" ></teammates>
+			<teammates v-show="showTeammatesSelect" @cancelSelect="showTeammatesSelect = false" @confirmSelect="addTeammates"></teammates>
 		</transition>
 	</div>
 </template>
@@ -54,11 +60,13 @@
 				deadline: '',
 				text: '',
 				maxLength: 200,
-				type: '',
+				type: '应用开发',
 				showTeammatesSelect: false,
+				teammates: [],
 			}
 		},
 		methods: {
+			// Use weui.js, help us to realize the Picker. 
 			typePicker () {
 				let $vue = this
 				weui.picker([
@@ -90,17 +98,31 @@
 				   id: 'singleLinePicker'
 				});
 			},
+
+			// test
 			postData () {
 				console.log(this.title, this.type, this.text, this.deadline)
 			},
+
+			// Show teammates components 
 			showSelect () {
 				this.showTeammatesSelect = true
 			},
+
+			addTeammates (teammates) {
+				console.log(teammates)
+				this.teammates = teammates
+				this.showTeammatesSelect = false
+			}
+
 		},
 		computed: {
+
+			// Control the length of description
 			disabled () {
 				return this.text.length == this.maxLength ? true : false
 			}
+
 		},
 		components: {
 			searchBar,
@@ -154,5 +176,18 @@
 		transform: translateX(-100%);
 	}
 	
+
+	.team-members {
+		display: flex;
+		.team-member-item {
+			margin: 5px;
+			width: 36px;
+			height: 36px;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
 
 </style>
