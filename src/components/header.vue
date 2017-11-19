@@ -1,6 +1,6 @@
 <template>
 	<div id="header">
-		<span>组队系统</span>
+		<span>{{headerName}}</span>
 		<router-link to="/post">
 			<div id="add-info"></div>
 		</router-link>
@@ -12,6 +12,11 @@
 		name: 'header',
 		data () {
 			return {}
+		},
+		props: {
+			headerName: {
+				default: '组队系统'
+			}
 		}
 	}
 </script>

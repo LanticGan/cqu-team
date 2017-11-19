@@ -1,5 +1,6 @@
 <template>
 	<div id="post">
+		<my-header headerName="需求发布"></my-header>
 		<form action="" method="post" enctype="multipart/form-data" id="identify-form">
 			<div class="weui-cell">
 	            <div class="weui-cell__hd"><label class="weui-label">比赛名称</label></div>
@@ -26,7 +27,7 @@
 	            	<label class="weui-label">团队成员</label>
 	            </div>
 	            <div class="weui-cell__bd">
-	                <input class="weui-input" type="text" placeholder="点击配置团队成员" disabled="disabled">
+	                <input class="weui-input" type="text" placeholder="点击配置团队现有成员" disabled="disabled">
 	             </div>
 	        </div>
 	        <div class="team-members" style="margin-left:15px;">	
@@ -41,7 +42,7 @@
 	            </div>
 	        </div>
 	        <div class="post-btn" @click="postData">
-	        	<a href="javascript:;" class="weui-btn weui-btn_plain-default">发布需求</a>
+	        	<a href="javascript:;" class="weui-btn weui-btn_plain-default">发布</a>
 	        </div>
 		</form>
 		<transition name="teammates">
@@ -53,6 +54,7 @@
 <script>
 	import searchBar from '../components/search.vue'
 	import teammates from './teammates.vue'
+	import myHeader from '../components/header.vue'
 	export default {
 		data () {
 			return {
@@ -127,6 +129,7 @@
 		components: {
 			searchBar,
 			teammates,
+			myHeader,
 		}
 	}
 </script>

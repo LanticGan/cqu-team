@@ -36,14 +36,14 @@
 					{
 						userId: 1,
 						userName: '甘宇廷',
-						userAvatar: '../assets/img/test-avatar.png',
+						userAvatar: '/src/assets/img/test-avatar.png',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					},
 					{
 						userId: 2,
 						userName: '姚裕欣',
-						userAvatar: '../assets/img/test-avatar.png',
+						userAvatar: '/src/assets/img/test-avatar.png',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					}

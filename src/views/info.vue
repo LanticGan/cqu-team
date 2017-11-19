@@ -1,8 +1,10 @@
 <template>
 	<div id="info">
+		<my-header headerName="比赛资讯"></my-header>
 		<search-bar></search-bar>
 		<tab-bar></tab-bar>
 		<competition-list></competition-list>
+		<footer-tab></footer-tab>
  	</div>
 </template>
 
@@ -10,6 +12,8 @@
 	import searchBar from '../components/search.vue'
 	import tabBar from '../components/tabbar.vue'
 	import competitionList from './competition-list.vue'
+	import footerTab from '../components/footer.vue'
+	import myHeader from '../components/header.vue'
 	export default {
 		name: 'info',
 		data () {
@@ -17,9 +21,11 @@
 			}
 		},
 		components: {
+			myHeader,
 			searchBar,
 			tabBar,
 			competitionList,
+			footerTab,
 		}
 	}
 </script>

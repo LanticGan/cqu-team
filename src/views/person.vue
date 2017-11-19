@@ -1,27 +1,33 @@
 <template>
 	<div class="user-info">
-		<div class="user-avatar">
-			<img src="../assets/img/favicon.jpg" alt="avatar" id="ava">
-		</div>
-		<div class="user-name">
-			Lantic
-		</div>
+		<my-header headerName="个人主页"></my-header>
+			<div class="user-avatar">
+				<img src="../assets/img/favicon.jpg" alt="avatar" id="ava">
+			</div>
+			<div class="user-name">
+				Lantic
+			</div>
+		<footer-tab></footer-tab>
 	</div>
 </template>
 
 <script>
+	import footerTab from '../components/footer.vue'
+	import myHeader from '../components/header.vue'
 	export default {
 		name: 'person',
 		data () {
 			return {}
+		},
+		components: {
+			footerTab,
+			myHeader,
 		},
 	}
 </script>
 
 <style lang="scss">
 	.user-info {
-		margin: 2em 0;
-
 		.user-avatar {
 			width: 6em;
 			height: 6em;

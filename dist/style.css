@@ -264,19 +264,41 @@ body {
 }
 
 .weui-article {
-  padding: 5px 15px !important;
+  color: #575757;
+  margin: 0.6em 0 0 0;
+  padding: 0.6em 15px !important;
 }
-.weui-article h1 {
-    font-weight: 400;
-    text-align: center;
-    font-size: 1.5em !important;
-    margin-top: 0;
+.cb-title {
+  text-align: center;
+  padding: 1em 0;
+  box-shadow: 0 4px 1px #eaeaea;
+  font-size: 1.3em;
 }
-.weui-article h2 {
-    font-weight: 400;
-    font-size: 1.3em !important;
-    margin-top: 1em;
-    margin-bottom: 0.5em;
+.cb-team-leader {
+  margin: 0.4em 0;
+  box-shadow: 0 4px 1px #eaeaea;
+}
+.cb-introduce {
+  padding: 0.4em 0;
+}
+.cb-requirements {
+  box-shadow: 0 4px 1px #eaeaea;
+}
+.cb-teammates {
+  box-shadow: 0 4px 1px #eaeaea;
+}
+.cb-block-description {
+  padding: 0.4em 0.8em;
+  border-bottom: solid 1px #efefef;
+}
+.cb-block-description img {
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    margin: 0 4px;
+}
+.cb-block-description span {
+    vertical-align: middle;
 }
 
 .content-list {
@@ -330,24 +352,21 @@ body {
         border-radius: 50%;
 }
 
-.user-info {
-  margin: 2em 0;
-}
 .user-info .user-avatar {
-    width: 6em;
-    height: 6em;
-    margin: 1em auto;
-    display: flex;
-    justify-content: center;
+  width: 6em;
+  height: 6em;
+  margin: 1em auto;
+  display: flex;
+  justify-content: center;
 }
 .user-info #ava {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 .user-info .user-name {
-    font-size: 1em;
-    text-align: center;
+  font-size: 1em;
+  text-align: center;
 }
 
 .weui-cell {
