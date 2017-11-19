@@ -353,8 +353,8 @@ body {
 }
 
 .user-info .user-avatar {
-  width: 5em;
-  height: 5em;
+  width: 6em;
+  height: 6em;
   margin: 1em auto;
   display: flex;
   justify-content: center;
@@ -367,44 +367,6 @@ body {
 .user-info .user-name {
   font-size: 1em;
   text-align: center;
-}
-.p-block-description {
-  padding: 0.4em 0.8em;
-  border-top: solid 1px #efefef;
-}
-.p-block-description * {
-    vertical-align: middle;
-}
-.p-block-description img {
-    width: 22px;
-    height: 22px;
-    margin: 0 4px;
-}
-.p-block-description span {
-    font-size: 0.9em;
-    font-weight: 600;
-}
-.p-resume {
-  margin-top: 1em;
-}
-.p-resume .resume-text {
-    font-family: -apple-system-font,Helvetica Neue,sans-serif;
-    word-wrap: break-word;
-    color: #575757;
-    padding: 0.6em 1.1em;
-}
-.p-resume .resume-text .weui-cell {
-      margin: 0 !important;
-      padding: 0 !important;
-}
-.p-resume .resume-text .weui-cell:before {
-        border: 0 !important;
-}
-.p-posted {
-  margin-top: 1em;
-}
-.edit-active {
-  color: blue !important;
 }
 
 .weui-cell {

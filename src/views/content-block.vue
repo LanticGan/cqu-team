@@ -6,14 +6,14 @@
 
 		<div class="cb-team-leader">
 			<div class="cb-block-description">
-				<img src="/src/assets/img/team-leader.png" alt="">
+				<img src="src/assets/img/team-leader.png" alt="">
 				<span>组队发起人</span>
 			</div>
 			<div class="cb-introduce">
 				<div class="m-item-block" style="padding: 0;border:0;">
 					<div class="m-user-info">
 						<div class="m-avater">
-							<img src="/src/assets/img/test-avatar.png" alt="avatar">
+							<img src="src/assets/img/test-avatar.png" alt="avatar">
 						</div>
 					</div>
 					<div class="m-resume">
@@ -21,7 +21,7 @@
 						<p class="m-des">66666666666666666666666666666666666</p>
 					</div>
 					<div class="right-arrow" style="width:20px;height:20px;">
-						<img src="/src/assets/img/right-arrow.png" alt="" style="width:100%;">	
+						<img src="src/assets/img/right-arrow.png" alt="" style="width:100%;">	
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 
 		<div class="cb-requirements">
 			<div class="cb-block-description">
-				<img src="/src/assets/img/introduction.png" alt="">
+				<img src="src/assets/img/introduction.png" alt="">
 				<span>详情描述</span>
 			</div>
 			<div class="weui-article">
@@ -44,7 +44,7 @@
 
 		<div class="cb-teammates">
 			<div class="cb-block-description">
-				<img src="/src/assets/img/teammates.png" alt="">
+				<img src="src/assets/img/teammates.png" alt="">
 				<span>团队现有成员</span>
 			</div>
 			<div class="team-members" style="margin-left:15px;padding: 0.4em 0;">	
@@ -56,7 +56,7 @@
 
 		<div class="cb-numbers">
 			<div class="cb-block-description">
-				<img src="/src/assets/img/communication.png" alt="">
+				<img src="src/assets/img/communication.png" alt="">
 				<span>联系方式</span>
 			</div>
 			<div class="weui-article">
@@ -96,14 +96,14 @@
 					{
 						userId: 1,
 						userName: '甘宇廷',
-						userAvatar: '/src/assets/img/test-avatar.png',
+						userAvatar: 'src/assets/img/test-avatar.png',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					},
 					{
 						userId: 2,
 						userName: '姚裕欣',
-						userAvatar: '/src/assets/img/test-avatar.png',
+						userAvatar: 'src/assets/img/test-avatar.png',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					}
