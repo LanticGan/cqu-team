@@ -20,7 +20,7 @@
 
 				<div class="weui-cell" v-show="editActive">
 		            <div class="weui-cell__bd">
-			            <textarea v-model="resume" class="weui-textarea" :disabled="disabled" rows="3" autofocus="true"></textarea>
+			            <textarea  id="edit-resume" v-model="resume" class="weui-textarea" :disabled="disabled" rows="3"></textarea>
 			            <div class="weui-textarea-counter"><span>{{resume.length}}</span>/{{maxLength}}</div>
 		            </div>
 		        </div>
@@ -56,10 +56,13 @@
 		},
 		methods: {
 			editAndPost () {
+				let editResume = document.getElementById('edit-resume');
 				if (this.editText == '完成') {
 					this.editText = '编辑'
+					editResume.blur()
 					console.log('posting')
 				} else {
+					editResume.focus()
 					this.editText = '完成'
 				}
 

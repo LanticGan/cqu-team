@@ -13214,10 +13214,13 @@ if (false) {(function () {
 	},
 	methods: {
 		editAndPost () {
+			let editResume = document.getElementById('edit-resume');
 			if (this.editText == '完成') {
 				this.editText = '编辑'
+				editResume.blur()
 				console.log('posting')
 			} else {
+				editResume.focus()
 				this.editText = '完成'
 			}
 
@@ -13321,9 +13324,9 @@ var render = function() {
                   ],
                   staticClass: "weui-textarea",
                   attrs: {
+                    id: "edit-resume",
                     disabled: _vm.disabled,
-                    rows: "3",
-                    autofocus: "true"
+                    rows: "3"
                   },
                   domProps: { value: _vm.resume },
                   on: {
