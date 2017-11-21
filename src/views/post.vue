@@ -3,9 +3,15 @@
 		<my-header headerName="需求发布"></my-header>
 		<form action="" method="post" enctype="multipart/form-data" id="identify-form">
 			<div class="weui-cell">
+		            <div class="weui-cell__hd"><label class="weui-label">招募标题</label></div>
+		            <div class="weui-cell__bd">
+		                <input v-model="title" class="weui-input"  placeholder="一个好的标题才能吸引大佬哦">
+		            </div>
+		    </div>
+			<div class="weui-cell">
 	            <div class="weui-cell__hd"><label class="weui-label">比赛名称</label></div>
 	            <div class="weui-cell__bd">
-	                <input v-model="title" class="weui-input"  placeholder="请输入比赛名称">
+	                <input v-model="competitionName" class="weui-input"  placeholder="您要参加的比赛">
 	            </div>
 	        </div>
 	        <div class="weui-cell" @click="typePicker" style="height:43.53px; box-sizing: border-box; line-height:23.525px;">
@@ -21,7 +27,7 @@
 	                <div class="weui-cell__bd">
 	                    <input class="weui-input" type="date" v-model="deadline">
 	                </div>
-	           </div>
+	        </div> 
 	        <div class="weui-cell" @click="showSelect">
 	            <div class="weui-cell__hd">
 	            	<label class="weui-label">团队成员</label>
@@ -36,8 +42,14 @@
 		        </div>
 	        </div>
 	        <div class="weui-cell">
+	            <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
 	            <div class="weui-cell__bd">
-		            <textarea v-model="text" class="weui-textarea" :disabled="disabled" placeholder="请简单描述您的招募需求~" rows="3"></textarea>
+	                <input class="weui-input"  placeholder="您要参加的比赛">
+	            </div>
+	        </div>
+	        <div class="weui-cell">
+	            <div class="weui-cell__bd">
+		            <textarea v-model="text" class="weui-textarea" :disabled="disabled" placeholder="请简单描述您的招募需求" rows="3"></textarea>
 		            <div class="weui-textarea-counter"><span>{{text.length}}</span>/{{maxLength}}</div>
 	            </div>
 	        </div>
@@ -59,12 +71,16 @@
 		data () {
 			return {
 				title: '',
+				competitionName: '',
 				deadline: '',
 				text: '',
 				maxLength: 200,
 				type: '应用开发',
 				showTeammatesSelect: false,
 				teammates: [],
+				year:'/',
+				month:'/',
+				day:'/',
 			}
 		},
 		methods: {
@@ -115,8 +131,12 @@
 				console.log(teammates)
 				this.teammates = teammates
 				this.showTeammatesSelect = false
-			}
+			},
 
+			// drag 
+			drag () {
+				console.log(1)
+			},
 		},
 		computed: {
 
@@ -176,7 +196,7 @@
 	}
 
 	.teammates-enter, .teammates-leave-to {
-		transform: translateX(-100%);
+		transform: translateX(100%);
 	}
 	
 

@@ -30,15 +30,27 @@
 		<div class="cb-requirements">
 			<div class="cb-block-description">
 				<img src="src/assets/img/introduction.png" alt="">
-				<span>详情描述</span>
+				<span>比赛信息</span>
 			</div>
 			<div class="weui-article">
+				<p>比赛名称:</p>
+				<p>aaa</p>
 				<p>比赛类别:</p>
 				<p>aaa</p>
 				<p>比赛截止时间:</p>
 				<p>bbb</p>
-				<p>招募需求:</p>
-				<p>ccc</p>
+				<p>比赛详情:</p>
+				<p><a href="#">url</a></p>
+			</div>
+		</div>
+
+		<div class="cb-requirements">
+			<div class="cb-block-description">
+				<img src="src/assets/img/demand.png" alt="">
+				<span>招募需求</span>
+			</div>
+			<div class="weui-article">
+				<p>ccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac</p>
 			</div>
 		</div>
 

@@ -441,7 +441,7 @@ body {
   transition: all .5s;
 }
 .teammates-enter, .teammates-leave-to {
-  transform: translateX(-100%);
+  transform: translateX(100%);
 }
 .team-members {
   display: flex;
