@@ -1,13 +1,13 @@
 <template>
 	<div class="competition-list">
-		<router-link class="competition-item" v-for="item of items" :to="item.url" :key="item.id">
+		<router-link class="competition-item" v-for="item of competitions" :to="item.url" :key="item.id">
 			<div class="cl-item-block">
 				<div class="cl-thumb">
-					<img :src="item.avatar" alt="avatar">
+					<img :src="item.thumb" alt="avatar">
 				</div>
 				<div class="competition-info">
 					<p class="cl-title">{{item.title}}</p>
-					<p class="cl-des">{{item.description}}</p>
+					<p class="cl-des">{{item.prev}}</p>
 				</div>
 			</div>
 		</router-link>
@@ -16,11 +16,10 @@
 
 <script>
 	export default {
-		name: 'contentList',
+		name: 'competitionList',
 		props: {
-			filter1: {
-				type: String,
-				default: '',
+			competitions: {
+				default: [],
 			},
 			filter2: {
 				type: String,
@@ -33,7 +32,7 @@
 					{
 						id:1,
 						username: '甘宇廷',
-						avatar: 'src/assets/img/test-avatar.png',
+						thumb: 'src/assets/img/test-avatar.png',
 						title: '计算机设计大赛',
 						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊，求编程大佬一枚三缺一，啊啊啊，求编程大佬一枚三缺一，啊啊啊',
 						url: {

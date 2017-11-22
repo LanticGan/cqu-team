@@ -3,7 +3,7 @@
 		<my-header headerName="比赛资讯"></my-header>
 		<search-bar></search-bar>
 		<tab-bar></tab-bar>
-		<competition-list></competition-list>
+		<competition-list :competitions="competitionsList"></competition-list>
 		<footer-tab></footer-tab>
  	</div>
 </template>
@@ -18,8 +18,48 @@
 		name: 'info',
 		data () {
 			return {
+				competitionsList: []
 			}
 		},
+
+		created () {
+			this.fetchData()
+		},
+
+		watch: {
+			'$route': 'fetchData',
+		},
+
+		methods: {
+			fetchData () {
+				let data = {
+					th:0,
+					page:1,
+					type:0,
+					name:0,
+				};
+				// Save Vue instance
+				let that = this;
+
+				ajax.send('GET', '/djangoapi/competitions', data, function (err, res){
+					if (err) {
+						return
+					} else {
+						let resCompetitionsList = JSON.parse(res);
+						resCompetitionsList.forEach(function (item) {
+							item.url = {
+								name: 'competition',
+                                params: {
+                                	competitionId: `${item.id}`
+                                }
+							}
+						})
+						that.competitionsList = resCompetitionsList
+					}
+				})
+			}
+		},
+
 		components: {
 			myHeader,
 			searchBar,

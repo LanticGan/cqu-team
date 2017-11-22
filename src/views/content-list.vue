@@ -1,6 +1,6 @@
 <template>
 	<div class="content-list">
-		<router-link class="content-item" v-for="item of items" :to="item.url" :key="item.id">
+		<router-link class="content-item" v-for="item of itemsa" :to="item.url" :key="item.id">
 			<div class="c-item-block">
 				<div class="c-user-info">
 					<div class="c-avater">
@@ -21,10 +21,6 @@
 	export default {
 		name: 'contentList',
 		props: {
-			filter1: {
-				type: String,
-				default: '',
-			},
 			filter2: {
 				type: String,
 				default: '',
@@ -32,7 +28,7 @@
 		},
 		data () {
 			return {
-				items: [
+				itemsa: [
 					{
 						id:1,
 						username: '甘宇廷',
@@ -47,77 +43,13 @@
 							}
 						},
 					},
-					{
-						id:2,
-						username: '甘宇廷',
-						avatar: 'src/assets/img/test-avatar.png',
-						title: '计算机设计大赛',
-						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-						url: {
-							name: 'content',
-							params: {
-								contentId: 2,
-								userName: '杨华岚',
-							}
-						},
-					},
-					{
-						id:3,
-						username: '甘宇廷',
-						avatar: 'src/assets/img/test-avatar.png',
-						title: '计算机设计大赛',
-						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-						url: {
-							name: 'content',
-							params: {
-								contentId: 3,
-								userName: '甘宇廷',
-								description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-							}
-						},
-					},
-					{
-						id:4,
-						username: '甘宇廷',
-						avatar: 'src/assets/img/test-avatar.png',
-						title: '计算机设计大赛',
-						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-						url: {
-							name: 'content',
-							params: {
-								contentId: 4,
-								userName: '甘宇廷',
-							}
-						},
-					},
-					{
-						id:5,
-						username: '甘宇廷',
-						avatar: 'src/assets/img/test-avatar.png',
-						title: '计算机设计大赛',
-						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-						url: {
-							name: 'content',
-							params: {
-								contentId: 5,
-							}
-						},
-					},
-					{
-						id:6,
-						username: '甘宇廷',
-						avatar: 'src/assets/img/test-avatar.png',
-						title: '计算机设计大赛',
-						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-						url: {
-							name: 'content',
-							params: {
-								contentId: 6,
-							}
-						},
-					},
-
 				]
+			}
+		},
+
+		methods: {
+			items () {
+				return JSON.parse(this.competitions)
 			}
 		}
 	}

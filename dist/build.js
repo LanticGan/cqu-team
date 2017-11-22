@@ -10922,8 +10922,49 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'info',
 	data() {
-		return {};
+		return {
+			competitionsList: []
+		};
 	},
+
+	created() {
+		this.fetchData();
+	},
+
+	watch: {
+		'$route': 'fetchData'
+	},
+
+	methods: {
+		fetchData() {
+			let data = {
+				th: 0,
+				page: 1,
+				type: 0,
+				name: 0
+			};
+			// Save Vue instance
+			let that = this;
+
+			ajax.send('GET', '/djangoapi/competitions', data, function (err, res) {
+				if (err) {
+					return;
+				} else {
+					let resCompetitionsList = JSON.parse(res);
+					resCompetitionsList.forEach(function (item) {
+						item.url = {
+							name: 'competition',
+							params: {
+								competitionId: `${item.id}`
+							}
+						};
+					});
+					that.competitionsList = resCompetitionsList;
+				}
+			});
+		}
+	},
+
 	components: {
 		myHeader: __WEBPACK_IMPORTED_MODULE_4__components_header_vue__["a" /* default */],
 		searchBar: __WEBPACK_IMPORTED_MODULE_0__components_search_vue__["a" /* default */],
@@ -10979,17 +11020,6 @@ if (false) {(function () {
 		},
 		onSubmit: function () {
 			this.$emit("searchActive", this.filter1);
-		},
-		ajax() {
-			let data = {
-				th: 0,
-				type: 0,
-				name: 0,
-				page: 0
-			};
-			ajax.send('GET', 'http://39.108.2.49:8080/cominfo/gc/', data, function (res) {
-				console.log(res);
-			});
 		}
 	}
 });
@@ -11003,80 +11033,76 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "bar", attrs: { id: "searchBar" }, on: { click: _vm.ajax } },
-    [
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              _vm.onSubmit($event)
-            }
+  return _c("div", { staticClass: "bar", attrs: { id: "searchBar" } }, [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            _vm.onSubmit($event)
           }
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "search-bar__box",
-              class: { active: _vm.isSearching }
-            },
-            [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.filter1,
-                    expression: "filter1"
-                  }
-                ],
-                staticClass: "search-bar__input",
-                attrs: {
-                  type: "text",
-                  id: "search-input",
-                  placeholder: _vm.inputHolder
-                },
-                domProps: { value: _vm.filter1 },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.filter1 = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "label",
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "search-bar__box",
+            class: { active: _vm.isSearching }
+          },
+          [
+            _c("input", {
+              directives: [
                 {
-                  attrs: { id: "search-text", for: "search-input" },
-                  on: { click: _vm.searching }
-                },
-                [
-                  _c("img", {
-                    attrs: { src: __webpack_require__(30) }
-                  }),
-                  _vm._v(" "),
-                  _c("span", { attrs: { id: "searchM" } }, [_vm._v("搜索")])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "span",
-                { attrs: { id: "cancelM" }, on: { click: _vm.cancelSearch } },
-                [_vm._v("取消")]
-              )
-            ]
-          )
-        ]
-      )
-    ]
-  )
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.filter1,
+                  expression: "filter1"
+                }
+              ],
+              staticClass: "search-bar__input",
+              attrs: {
+                type: "text",
+                id: "search-input",
+                placeholder: _vm.inputHolder
+              },
+              domProps: { value: _vm.filter1 },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.filter1 = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                attrs: { id: "search-text", for: "search-input" },
+                on: { click: _vm.searching }
+              },
+              [
+                _c("img", {
+                  attrs: { src: __webpack_require__(30) }
+                }),
+                _vm._v(" "),
+                _c("span", { attrs: { id: "searchM" } }, [_vm._v("搜索")])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { attrs: { id: "cancelM" }, on: { click: _vm.cancelSearch } },
+              [_vm._v("取消")]
+            )
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -11382,11 +11408,10 @@ if (false) {(function () {
 //
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-	name: 'contentList',
+	name: 'competitionList',
 	props: {
-		filter1: {
-			type: String,
-			default: ''
+		competitions: {
+			default: []
 		},
 		filter2: {
 			type: String,
@@ -11398,7 +11423,7 @@ if (false) {(function () {
 			items: [{
 				id: 1,
 				username: '甘宇廷',
-				avatar: 'src/assets/img/test-avatar.png',
+				thumb: 'src/assets/img/test-avatar.png',
 				title: '计算机设计大赛',
 				description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊，求编程大佬一枚三缺一，啊啊啊，求编程大佬一枚三缺一，啊啊啊',
 				url: {
@@ -11464,7 +11489,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "competition-list" },
-    _vm._l(_vm.items, function(item) {
+    _vm._l(_vm.competitions, function(item) {
       return _c(
         "router-link",
         {
@@ -11475,7 +11500,7 @@ var render = function() {
         [
           _c("div", { staticClass: "cl-item-block" }, [
             _c("div", { staticClass: "cl-thumb" }, [
-              _c("img", { attrs: { src: item.avatar, alt: "avatar" } })
+              _c("img", { attrs: { src: item.thumb, alt: "avatar" } })
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "competition-info" }, [
@@ -11483,9 +11508,7 @@ var render = function() {
                 _vm._v(_vm._s(item.title))
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "cl-des" }, [
-                _vm._v(_vm._s(item.description))
-              ])
+              _c("p", { staticClass: "cl-des" }, [_vm._v(_vm._s(item.prev))])
             ])
           ])
         ]
@@ -11523,7 +11546,7 @@ var render = function() {
       _vm._v(" "),
       _c("tab-bar"),
       _vm._v(" "),
-      _c("competition-list"),
+      _c("competition-list", { attrs: { competitions: _vm.competitionsList } }),
       _vm._v(" "),
       _c("footer-tab")
     ],
@@ -12070,10 +12093,6 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'contentList',
 	props: {
-		filter1: {
-			type: String,
-			default: ''
-		},
 		filter2: {
 			type: String,
 			default: ''
@@ -12081,7 +12100,7 @@ if (false) {(function () {
 	},
 	data() {
 		return {
-			items: [{
+			itemsa: [{
 				id: 1,
 				username: '甘宇廷',
 				avatar: 'src/assets/img/test-avatar.png',
@@ -12094,72 +12113,14 @@ if (false) {(function () {
 						userName: '甘宇廷'
 					}
 				}
-			}, {
-				id: 2,
-				username: '甘宇廷',
-				avatar: 'src/assets/img/test-avatar.png',
-				title: '计算机设计大赛',
-				description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-				url: {
-					name: 'content',
-					params: {
-						contentId: 2,
-						userName: '杨华岚'
-					}
-				}
-			}, {
-				id: 3,
-				username: '甘宇廷',
-				avatar: 'src/assets/img/test-avatar.png',
-				title: '计算机设计大赛',
-				description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-				url: {
-					name: 'content',
-					params: {
-						contentId: 3,
-						userName: '甘宇廷',
-						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊'
-					}
-				}
-			}, {
-				id: 4,
-				username: '甘宇廷',
-				avatar: 'src/assets/img/test-avatar.png',
-				title: '计算机设计大赛',
-				description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-				url: {
-					name: 'content',
-					params: {
-						contentId: 4,
-						userName: '甘宇廷'
-					}
-				}
-			}, {
-				id: 5,
-				username: '甘宇廷',
-				avatar: 'src/assets/img/test-avatar.png',
-				title: '计算机设计大赛',
-				description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-				url: {
-					name: 'content',
-					params: {
-						contentId: 5
-					}
-				}
-			}, {
-				id: 6,
-				username: '甘宇廷',
-				avatar: 'src/assets/img/test-avatar.png',
-				title: '计算机设计大赛',
-				description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
-				url: {
-					name: 'content',
-					params: {
-						contentId: 6
-					}
-				}
 			}]
 		};
+	},
+
+	methods: {
+		items() {
+			return JSON.parse(this.competitions);
+		}
 	}
 });
 
@@ -12175,7 +12136,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "content-list" },
-    _vm._l(_vm.items, function(item) {
+    _vm._l(_vm.itemsa, function(item) {
       return _c(
         "router-link",
         { key: item.id, staticClass: "content-item", attrs: { to: item.url } },

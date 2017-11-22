@@ -1,5 +1,5 @@
 <template>
-	<div class="bar" id="searchBar" @click="ajax">
+	<div class="bar" id="searchBar">
 		<form @submit.prevent="onSubmit">
 			<div class= "search-bar__box" :class="{ 'active': isSearching }">
 				<input v-model="filter1" type="text" id="search-input" class="search-bar__input" :placeholder="inputHolder">
@@ -34,19 +34,8 @@
 			onSubmit: function () {
 				this.$emit("searchActive", this.filter1)
 			},
-			ajax () {
-				let data = {
-					th: 0,
-					type: 0,
-					name: 0,
-					page: 0,
-				};
-				ajax.send('GET', 'http://39.108.2.49:8080/cominfo/gc/', data, function (res) {
-					console.log(res)
-				})
-			}
-		},
 	}
+}
 </script>
 <style lang="scss">
 	#searchBar {
