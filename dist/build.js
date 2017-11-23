@@ -10940,7 +10940,7 @@ if (false) {(function () {
 
 			//scroll property
 			scrollTop: -1,
-
+			bodyTop: -1,
 			showLoadMore: false,
 			noMoredata: false
 		};
@@ -11053,7 +11053,8 @@ if (false) {(function () {
 			//初始化锁
 			let unlock = true;
 			scrollCarrier.addEventListener('touchmove', function () {
-				let scrollTop = document.documentElement.scrollTop;
+				// safari浏览器document.documentElement.scrollTop一直为0, 而其余大多浏览器document.body.scrollTop一直为0，这行代码解决了这个问题，太优雅了。
+				let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
 				// 判断是否拉到底部
 				if (that.scrollTop != scrollTop) {
 					that.scrollTop = scrollTop;
