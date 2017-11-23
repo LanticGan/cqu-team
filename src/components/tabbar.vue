@@ -10,7 +10,7 @@
 	<transition name="menu">
 		<div class="menu" id="type-menu" v-show="typeActive">
 			<div class="row" v-for="(row, rowIndex) in rows">
-				<div class="type-item" :class="{'item-active': (`${rowIndex}${itemIndex}` == activeItem)}" v-for="(item, itemIndex) in row.row" :key="item.id" @click="clickItem(`${rowIndex}${itemIndex}`,item.id)">
+				<div class="type-item" :class="{'item-active': (`${rowIndex}${itemIndex}` == activeItem)}" v-for="(item, itemIndex) in row.row" :key="item.id" @click="clickItem(`${rowIndex}${itemIndex}`,item.name)">
 					{{item.name}}
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 							},
 							{
 								id:"gg",
-								name: '广告创意',
+								name: '应用开发',
 							},
 							{
 								id:"xk",
@@ -52,19 +52,19 @@
 						row: [
 							{
 								id:"xxcg",
-								name: '选秀唱歌',
+								name: '科技大赛',
 							},
 							{
 								id:"wxyj",
-								name: '文学演讲',
+								name: '摄影影视',
 							},
 							{
 								id:"yxch",
-								name: '营销策划',
+								name: '金融大赛',
 							},
 							{
 								id:"sjbs",
-								name: '设计比赛',
+								name: '公益大赛',
 							}
 						],
 					},
@@ -74,18 +74,17 @@
 		},
 		methods: {
 			timsIsActive () {
-				// send message to team.vue
-				this.$emit('filterActive', 'hhh')
+				this.$emit('filterActive', 'time')
 				this.timeActive = true
 				this.hotActive = false
 			},
 			hotIsActive () {
-				// send message to team.vue
+				this.$emit('filterActive', 'hot')
 				this.hotActive = true
 				this.timeActive = false
 			},
 			clickItem (index, content) {
-				// send message to team.vue
+				this.$emit('typeActive', content)
 				this.activeItem = index
 			},
 			typeIsActive () {

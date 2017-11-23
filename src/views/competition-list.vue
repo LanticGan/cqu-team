@@ -93,7 +93,7 @@
 </script>
 
 <style lang="scss">
-	.content-list {
+	.competition-list {
 		margin-bottom: 2em;
 	}
 	.competition-item {
@@ -124,7 +124,7 @@
 					margin: 12px;
 				}
 				.cl-title {
-					height: 1.2em;
+					height: 1em;
 					font-size:1.2em;
 					font-weight: 400;
 					margin-bottom:0;

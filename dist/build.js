@@ -10923,7 +10923,14 @@ if (false) {(function () {
 	name: 'info',
 	data() {
 		return {
-			competitionsList: []
+			competitionsList: [],
+
+			// competitions filter params
+			th: 0,
+			type: 0,
+			name: 0,
+			page: 1
+
 		};
 	},
 
@@ -10932,21 +10939,41 @@ if (false) {(function () {
 	},
 
 	watch: {
-		'$route': 'fetchData'
+		'$route': 'fetchData',
+		'th': 'fetchData',
+		'type': 'fetchData'
 	},
 
 	methods: {
-		fetchData() {
-			let data = {
-				th: 0,
-				page: 1,
-				type: 0,
-				name: 0
-			};
-			// Save Vue instance
-			let that = this;
+		changeFilter(condition) {
+			if (condition == 'time') {
+				this.th = 0;
+			} else if (condition == 'hot') {
+				this.th = 1;
+			}
+		},
 
-			ajax.send('GET', '/djangoapi/competitions', data, function (err, res) {
+		changeType(type) {
+
+			// Satisfy the demand of API
+			if (type == '全部') {
+				this.type = 0;
+			} else {
+				this.type = type;
+			}
+		},
+
+		fetchData() {
+
+			let that = this;
+			let params = {
+				th: this.th,
+				type: this.type,
+				page: this.page,
+				name: this.name
+			};
+
+			ajax.send('GET', '/djangoapi/competitions', params, function (err, res) {
 				if (err) {
 					return;
 				} else {
@@ -10959,10 +10986,25 @@ if (false) {(function () {
 							}
 						};
 					});
-					that.competitionsList = resCompetitionsList;
+					that.updateData(resCompetitionsList);
 				}
 			});
+		},
+
+		updateData(data) {
+			// 如果page为1则重置列表，否则在列表末尾添加
+			if (this.page == 1) {
+				this.competitionsList = [];
+			}
+			this.competitionsList = this.competitionsList.concat(data);
+		},
+
+		scroll(event) {
+			let finger = event.targetTouches[0];
+			let initY = finger.clientY;
+			console.log(initY);
 		}
+
 	},
 
 	components: {
@@ -11170,7 +11212,7 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADD
 					name: '创业大赛'
 				}, {
 					id: "gg",
-					name: '广告创意'
+					name: '应用开发'
 				}, {
 					id: "xk",
 					name: '学科学术'
@@ -11178,16 +11220,16 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADD
 			}, {
 				row: [{
 					id: "xxcg",
-					name: '选秀唱歌'
+					name: '科技大赛'
 				}, {
 					id: "wxyj",
-					name: '文学演讲'
+					name: '摄影影视'
 				}, {
 					id: "yxch",
-					name: '营销策划'
+					name: '金融大赛'
 				}, {
 					id: "sjbs",
-					name: '设计比赛'
+					name: '公益大赛'
 				}]
 			}]
 
@@ -11195,18 +11237,17 @@ module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADD
 	},
 	methods: {
 		timsIsActive() {
-			// send message to team.vue
-			this.$emit('filterActive', 'hhh');
+			this.$emit('filterActive', 'time');
 			this.timeActive = true;
 			this.hotActive = false;
 		},
 		hotIsActive() {
-			// send message to team.vue
+			this.$emit('filterActive', 'hot');
 			this.hotActive = true;
 			this.timeActive = false;
 		},
 		clickItem(index, content) {
-			// send message to team.vue
+			this.$emit('typeActive', content);
 			this.activeItem = index;
 		},
 		typeIsActive() {
@@ -11294,7 +11335,7 @@ var render = function() {
                     },
                     on: {
                       click: function($event) {
-                        _vm.clickItem("" + rowIndex + itemIndex, item.id)
+                        _vm.clickItem("" + rowIndex + itemIndex, item.name)
                       }
                     }
                   },
@@ -11538,13 +11579,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "info" } },
+    {
+      attrs: { id: "info" },
+      nativeOn: {
+        touchstart: function($event) {
+          _vm.scroll($event)
+        }
+      }
+    },
     [
       _c("my-header", { attrs: { headerName: "比赛资讯" } }),
       _vm._v(" "),
       _c("search-bar"),
       _vm._v(" "),
-      _c("tab-bar"),
+      _c("tab-bar", {
+        on: { filterActive: _vm.changeFilter, typeActive: _vm.changeType }
+      }),
       _vm._v(" "),
       _c("competition-list", { attrs: { competitions: _vm.competitionsList } }),
       _vm._v(" "),

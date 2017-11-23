@@ -1,8 +1,8 @@
 <template>
-	<div id="info">
+	<div id="info" @touchstart.native="scroll">
 		<my-header headerName="比赛资讯"></my-header>
 		<search-bar></search-bar>
-		<tab-bar></tab-bar>
+		<tab-bar @filterActive="changeFilter" @typeActive="changeType"></tab-bar>
 		<competition-list :competitions="competitionsList"></competition-list>
 		<footer-tab></footer-tab>
  	</div>
@@ -18,7 +18,14 @@
 		name: 'info',
 		data () {
 			return {
-				competitionsList: []
+				competitionsList: [],
+
+				// competitions filter params
+				th: 0,
+				type: 0,
+				name: 0,
+				page: 1,
+
 			}
 		},
 
@@ -26,22 +33,45 @@
 			this.fetchData()
 		},
 
+
 		watch: {
 			'$route': 'fetchData',
+			'th': 'fetchData',
+			'type': 'fetchData',
 		},
 
 		methods: {
-			fetchData () {
-				let data = {
-					th:0,
-					page:1,
-					type:0,
-					name:0,
-				};
-				// Save Vue instance
-				let that = this;
+			changeFilter (condition) {
+				if (condition == 'time') {
+					this.th = 0
+				}
 
-				ajax.send('GET', '/djangoapi/competitions', data, function (err, res){
+				else if (condition == 'hot') {
+					this.th = 1
+				}
+			},
+
+			changeType (type) {
+
+				// Satisfy the demand of API
+				if (type == '全部') {
+					this.type = 0
+				} else {
+					this.type = type
+				}
+			},
+
+			fetchData () {
+
+				let that = this;
+				let params = {
+					th: this.th,
+					type: this.type,
+					page: this.page,
+					name: this.name,
+				};
+
+				ajax.send('GET', '/djangoapi/competitions', params, function (err, res){
 					if (err) {
 						return
 					} else {
@@ -54,10 +84,25 @@
                                 }
 							}
 						})
-						that.competitionsList = resCompetitionsList
+						that.updateData(resCompetitionsList)
 					}
 				})
-			}
+			},
+
+			updateData (data) {
+				// 如果page为1则重置列表，否则在列表末尾添加
+				if (this.page == 1) {
+					this.competitionsList = []
+				} 
+				this.competitionsList = this.competitionsList.concat(data)
+			},
+
+			scroll (event) {
+				let finger = event.targetTouches[0];
+				let initY = finger.clientY;	
+				console.log(initY)
+			},
+
 		},
 
 		components: {
