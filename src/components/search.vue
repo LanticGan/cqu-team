@@ -28,11 +28,14 @@
 				this.inputHolder = '搜索'
 			},
 			cancelSearch: function () {
+				this.filter1 = ''
 				this.isSearching = false
 				this.inputHolder = ''
+				document.getElementById('search-input').blur()
 			},
 			onSubmit: function () {
 				this.$emit("searchActive", this.filter1)
+				this.cancelSearch()
 			},
 	}
 }

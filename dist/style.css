@@ -102,6 +102,9 @@ body {
     width: 4em;
     color: #f8767e;
 }
+.weui-loadmore {
+  margin: -2em auto 4em auto !important;
+}
 
 #searchBar {
   position: relative;
@@ -200,7 +203,6 @@ body {
       flex: 1;
       text-align: center;
       margin: 10px 6px;
-      height: 1.5em;
       line-height: 1.5em;
       border: 1px solid #E5E5E5;
       border-radius: 5px;

@@ -142,7 +142,6 @@
 				flex: 1;
 				text-align: center;
 				margin: 10px 6px;
-				height: $type-item-height;
 				line-height: $type-item-height;
 				border:1px solid #E5E5E5;
 				border-radius:5px;

@@ -10913,6 +10913,13 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10929,8 +10936,13 @@ if (false) {(function () {
 			th: 0,
 			type: 0,
 			name: 0,
-			page: 1
+			page: 1,
 
+			//scroll property
+			scrollTop: -1,
+
+			showLoadMore: false,
+			noMoredata: false
 		};
 	},
 
@@ -10938,10 +10950,32 @@ if (false) {(function () {
 		this.fetchData();
 	},
 
+	mounted() {
+		this.scroll();
+	},
+
 	watch: {
 		'$route': 'fetchData',
-		'th': 'fetchData',
-		'type': 'fetchData'
+
+		'th': function () {
+			//  重置
+			this.page = 1;
+			this.name = 0;
+			this.fetchData();
+		},
+
+		'type': function () {
+			this.name = 0;
+			this.page = 1;
+			this.fetchData();
+		},
+
+		'name': function () {
+			this.page = 1;
+			this.fetchData();
+		},
+
+		'page': 'fetchData'
 	},
 
 	methods: {
@@ -10954,7 +10988,6 @@ if (false) {(function () {
 		},
 
 		changeType(type) {
-
 			// Satisfy the demand of API
 			if (type == '全部') {
 				this.type = 0;
@@ -10963,8 +10996,12 @@ if (false) {(function () {
 			}
 		},
 
-		fetchData() {
+		changeName(name) {
+			this.name = name;
+		},
 
+		fetchData() {
+			this.showLoadMore = true;
 			let that = this;
 			let params = {
 				th: this.th,
@@ -10973,36 +11010,65 @@ if (false) {(function () {
 				name: this.name
 			};
 
+			// 如果page为1则重置列表，否则在列表末尾添加
+			if (this.page == 1) {
+				this.competitionsList = [];
+			}
+
 			ajax.send('GET', '/djangoapi/competitions', params, function (err, res) {
 				if (err) {
 					return;
 				} else {
-					let resCompetitionsList = JSON.parse(res);
-					resCompetitionsList.forEach(function (item) {
-						item.url = {
-							name: 'competition',
-							params: {
-								competitionId: `${item.id}`
+					// 判断是否还有数据
+					if (res != 'null') {
+						let resCompetitionsList = JSON.parse(res);
+						resCompetitionsList.forEach(function (item) {
+							if (item.id == -1) {
+								return;
 							}
-						};
-					});
-					that.updateData(resCompetitionsList);
+							item.url = {
+								name: 'competition',
+								params: {
+									competitionId: `${item.id}`
+								}
+							};
+						});
+						that.updateData(resCompetitionsList);
+					} else {
+						that.noMoredata = true;
+						that.showLoadMore = false;
+					}
 				}
 			});
 		},
 
 		updateData(data) {
-			// 如果page为1则重置列表，否则在列表末尾添加
-			if (this.page == 1) {
-				this.competitionsList = [];
-			}
+			this.showLoadMore = false;
 			this.competitionsList = this.competitionsList.concat(data);
 		},
 
-		scroll(event) {
-			let finger = event.targetTouches[0];
-			let initY = finger.clientY;
-			console.log(initY);
+		scroll() {
+			let that = this;
+			let scrollCarrier = document.getElementById('info');
+			//初始化锁
+			let unlock = true;
+			scrollCarrier.addEventListener('touchmove', function () {
+				let scrollTop = document.documentElement.scrollTop;
+				// 判断是否拉到底部
+				if (that.scrollTop != scrollTop) {
+					that.scrollTop = scrollTop;
+				} else {
+					if (that.scrollTop > 0 && unlock) {
+						that.page += 1;
+						// 加锁，防止一直加载，影响体验。
+						unlock = false;
+						// 2s后解锁。
+						setTimeout(() => {
+							unlock = true;
+						}, 2000);
+					}
+				}
+			});
 		}
 
 	},
@@ -11057,11 +11123,14 @@ if (false) {(function () {
 			this.inputHolder = '搜索';
 		},
 		cancelSearch: function () {
+			this.filter1 = '';
 			this.isSearching = false;
 			this.inputHolder = '';
+			document.getElementById('search-input').blur();
 		},
 		onSubmit: function () {
 			this.$emit("searchActive", this.filter1);
+			this.cancelSearch();
 		}
 	}
 });
@@ -11579,24 +11648,53 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      attrs: { id: "info" },
-      nativeOn: {
-        touchstart: function($event) {
-          _vm.scroll($event)
-        }
-      }
-    },
+    { attrs: { id: "info" } },
     [
       _c("my-header", { attrs: { headerName: "比赛资讯" } }),
       _vm._v(" "),
-      _c("search-bar"),
+      _c("search-bar", { on: { searchActive: _vm.changeName } }),
       _vm._v(" "),
       _c("tab-bar", {
         on: { filterActive: _vm.changeFilter, typeActive: _vm.changeType }
       }),
       _vm._v(" "),
       _c("competition-list", { attrs: { competitions: _vm.competitionsList } }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showLoadMore,
+              expression: "showLoadMore"
+            }
+          ],
+          staticClass: "weui-loadmore"
+        },
+        [
+          _c("i", { staticClass: "weui-loading" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "weui-loadmore__tips" }, [_vm._v("正在加载")])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.noMoredata,
+              expression: "noMoredata"
+            }
+          ],
+          staticClass: "weui-loadmore weui-loadmore_line"
+        },
+        [_c("span", { staticClass: "weui-loadmore__tips" }, [_vm._v("暂无数据")])]
+      ),
       _vm._v(" "),
       _c("footer-tab")
     ],
