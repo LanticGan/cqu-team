@@ -550,3 +550,15 @@ body {
     background-color: #fb7079;
     border: 1px solid #fb7079;
 }
+
+.competition-content img {
+  width: 100%;
+}
+.competition-title {
+  font-size: 1em !important;
+  text-align: center;
+}
+.info {
+  text-align: center;
+  margin-bottom: 0.4em;
+}

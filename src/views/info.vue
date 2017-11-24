@@ -99,6 +99,7 @@
 
 			fetchData () {
 				this.showLoadMore = true
+				this.noMoredata = false
 				let that = this;
 				let params = {
 					th: this.th,
