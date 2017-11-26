@@ -29,9 +29,27 @@
 	                </div>
 	        </div>
 	        <div class="weui-cell">
-	            <div class="weui-cell__hd"><label class="weui-label">联系方式</label></div>
+	            <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
 	            <div class="weui-cell__bd">
-	                <input class="weui-input"  placeholder="请留下您的联系方式">
+	                <input class="weui-input"  v-model="number" placeholder="选填">
+	            </div>
+	        </div>
+	        <div class="weui-cell">
+	            <div class="weui-cell__hd"><label class="weui-label">微信号</label></div>
+	            <div class="weui-cell__bd">
+	                <input class="weui-input" v-model="wechat" placeholder="选填">
+	            </div>
+	        </div>
+	        <div class="weui-cell">
+	            <div class="weui-cell__hd"><label class="weui-label">qq号</label></div>
+	            <div class="weui-cell__bd">
+	                <input class="weui-input"  v-model="qq" placeholder="选填">
+	            </div>
+	        </div>
+	        <div class="weui-cell">
+	            <div class="weui-cell__hd"><label class="weui-label">详情链接</label></div>
+	            <div class="weui-cell__bd">
+	                <input class="weui-input"  v-model="url" placeholder="帮助他人了解比赛详情">
 	            </div>
 	        </div>
 	        <div class="weui-cell" @click="showSelect">
@@ -73,14 +91,15 @@
 				title: '',
 				competitionName: '',
 				deadline: '',
+				type: '应用开发',
+				wechat:'',
+				number:'',
+				qq:'',
+				url: '',
 				text: '',
 				maxLength: 200,
-				type: '应用开发',
 				showTeammatesSelect: false,
 				teammates: [],
-				year:'/',
-				month:'/',
-				day:'/',
 			}
 		},
 		methods: {
@@ -89,20 +108,36 @@
 				let $vue = this
 				weui.picker([
 				{
-				    label: '应用开发',
+				    label: '创业大赛',
 				    value: 0,
 				},
 				{
-				    label: '创新大赛',
+				    label: '应用开发',
 				    value: 1
 				},
 				{
-				    label: '学科比赛',
-				    value: 3
+				    label: '学科学术',
+				    value: 2
+				},
+				{
+				    label: '科技大赛',
+				    value: 3,
+				},
+				{
+				    label: '摄影影视',
+				    value: 4,
+				},
+				{
+				    label: '金融大赛',
+				    value: 5,
+				},
+				{
+				    label: '公益大赛',
+				    value: 6,
 				},
 				{
 				    label: '其它',
-				    value: 4,
+				    value: 7,
 				}
 				], {
 				   className: 'competition-type-picker',
@@ -119,7 +154,25 @@
 
 			// test
 			postData () {
-				console.log(this.title, this.type, this.text, this.deadline)
+				let membersId = [];
+				this.teammates.forEach(function (item) {
+					membersId.push(item.userId)
+				})
+				let contact = `number:${this.number}&qq:${this.qq}&wechat:${this.wechat}`;
+				let data = {
+					title: this.title,
+					intro: '',
+					compet: {
+						name: this.competitionName,
+						type: this.type,
+						ddl: this.deadline,
+						url: this.url,
+					},
+					demand: this.text,
+					members: membersId,
+					contact: contact
+				}
+				console.log(data)
 			},
 
 			// Show teammates components 
@@ -131,11 +184,6 @@
 				console.log(teammates)
 				this.teammates = teammates
 				this.showTeammatesSelect = false
-			},
-
-			// drag 
-			drag () {
-				console.log(1)
 			},
 		},
 		computed: {

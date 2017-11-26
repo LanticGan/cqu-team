@@ -13647,6 +13647,24 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13657,14 +13675,15 @@ if (false) {(function () {
 			title: '',
 			competitionName: '',
 			deadline: '',
+			type: '应用开发',
+			wechat: '',
+			number: '',
+			qq: '',
+			url: '',
 			text: '',
 			maxLength: 200,
-			type: '应用开发',
 			showTeammatesSelect: false,
-			teammates: [],
-			year: '/',
-			month: '/',
-			day: '/'
+			teammates: []
 		};
 	},
 	methods: {
@@ -13672,17 +13691,29 @@ if (false) {(function () {
 		typePicker() {
 			let $vue = this;
 			weui.picker([{
-				label: '应用开发',
+				label: '创业大赛',
 				value: 0
 			}, {
-				label: '创新大赛',
+				label: '应用开发',
 				value: 1
 			}, {
-				label: '学科比赛',
+				label: '学科学术',
+				value: 2
+			}, {
+				label: '科技大赛',
 				value: 3
 			}, {
-				label: '其它',
+				label: '摄影影视',
 				value: 4
+			}, {
+				label: '金融大赛',
+				value: 5
+			}, {
+				label: '公益大赛',
+				value: 6
+			}, {
+				label: '其它',
+				value: 7
 			}], {
 				className: 'competition-type-picker',
 				container: 'body',
@@ -13697,7 +13728,25 @@ if (false) {(function () {
 
 		// test
 		postData() {
-			console.log(this.title, this.type, this.text, this.deadline);
+			let membersId = [];
+			this.teammates.forEach(function (item) {
+				membersId.push(item.userId);
+			});
+			let contact = `number:${this.number}&qq:${this.qq}&wechat:${this.wechat}`;
+			let data = {
+				title: this.title,
+				intro: '',
+				compet: {
+					name: this.competitionName,
+					type: this.type,
+					ddl: this.deadline,
+					url: this.url
+				},
+				demand: this.text,
+				members: membersId,
+				contact: contact
+			};
+			console.log(data);
 		},
 
 		// Show teammates components 
@@ -13709,11 +13758,6 @@ if (false) {(function () {
 			console.log(teammates);
 			this.teammates = teammates;
 			this.showTeammatesSelect = false;
-		},
-
-		// drag 
-		drag() {
-			console.log(1);
 		}
 	},
 	computed: {
@@ -14075,12 +14119,122 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", { staticClass: "weui-cell" }, [
+            _vm._m(4),
+            _vm._v(" "),
+            _c("div", { staticClass: "weui-cell__bd" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.number,
+                    expression: "number"
+                  }
+                ],
+                staticClass: "weui-input",
+                attrs: { placeholder: "选填" },
+                domProps: { value: _vm.number },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.number = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "weui-cell" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("div", { staticClass: "weui-cell__bd" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.wechat,
+                    expression: "wechat"
+                  }
+                ],
+                staticClass: "weui-input",
+                attrs: { placeholder: "选填" },
+                domProps: { value: _vm.wechat },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.wechat = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "weui-cell" }, [
+            _vm._m(6),
+            _vm._v(" "),
+            _c("div", { staticClass: "weui-cell__bd" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.qq,
+                    expression: "qq"
+                  }
+                ],
+                staticClass: "weui-input",
+                attrs: { placeholder: "选填" },
+                domProps: { value: _vm.qq },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.qq = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "weui-cell" }, [
+            _vm._m(7),
+            _vm._v(" "),
+            _c("div", { staticClass: "weui-cell__bd" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.url,
+                    expression: "url"
+                  }
+                ],
+                staticClass: "weui-input",
+                attrs: { placeholder: "帮助他人了解比赛详情" },
+                domProps: { value: _vm.url },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.url = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: "weui-cell", on: { click: _vm.showSelect } },
-            [_vm._m(5), _vm._v(" "), _vm._m(6)]
+            [_vm._m(8), _vm._v(" "), _vm._m(9)]
           ),
           _vm._v(" "),
           _c(
@@ -14210,17 +14364,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "weui-cell" }, [
-      _c("div", { staticClass: "weui-cell__hd" }, [
-        _c("label", { staticClass: "weui-label" }, [_vm._v("联系方式")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "weui-cell__bd" }, [
-        _c("input", {
-          staticClass: "weui-input",
-          attrs: { placeholder: "请留下您的联系方式" }
-        })
-      ])
+    return _c("div", { staticClass: "weui-cell__hd" }, [
+      _c("label", { staticClass: "weui-label" }, [_vm._v("手机号")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "weui-cell__hd" }, [
+      _c("label", { staticClass: "weui-label" }, [_vm._v("微信号")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "weui-cell__hd" }, [
+      _c("label", { staticClass: "weui-label" }, [_vm._v("qq号")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "weui-cell__hd" }, [
+      _c("label", { staticClass: "weui-label" }, [_vm._v("详情链接")])
     ])
   },
   function() {
