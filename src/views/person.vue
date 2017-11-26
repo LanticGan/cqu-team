@@ -53,7 +53,7 @@
 			return {
 				avatar: '', 
 				name: 'text',
-				resume: '计算机学院大三学生，擅长抱大腿',
+				resume: '',
 				maxLength: 100,
 				editActive: false,
 				editText: '编辑',
@@ -86,9 +86,14 @@
 					if (res.status == 'error') { 
 						window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id=86705621eba5382a&redirect_uri=http://f.yiban.cn/iapp171981"
 					} else {
+						console.log(res.data.id)
 						that.name = res.data.name
 						that.avatar = res.data.avatar
-						that.resume = JSON.stringify(res.data.resume)
+						if (res.data.resume == null) {
+							that.resume = JSON.stringify(res.data.resume)
+						} else {
+							that.resume = res.data.resume
+						}
 					}
 				})
 			},

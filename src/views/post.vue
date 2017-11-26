@@ -158,10 +158,10 @@
 				this.teammates.forEach(function (item) {
 					membersId.push(item.userId)
 				})
-				let contact = `number:${this.number}&qq:${this.qq}&wechat:${this.wechat}`;
+				let contact = `number:${this.number}qq:${this.qq}wechat:${this.wechat}`;
 				let data = {
 					title: this.title,
-					intro: '',
+					intro: this.text,
 					compet: {
 						name: this.competitionName,
 						type: this.type,
@@ -172,7 +172,10 @@
 					members: membersId,
 					contact: contact
 				}
-				console.log(data)
+				ajax.send('POST', '/api/groups', data, function (err, data) {
+					if (err) {return}
+					console.log('post sucess!')
+				})
 			},
 
 			// Show teammates components 

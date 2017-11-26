@@ -1,16 +1,16 @@
 <template>
 	<div class="content-list">
-		<router-link class="content-item" v-for="item of itemsa" :to="item.url" :key="item.id">
+		<router-link class="content-item" v-for="item of items" :to="item.url" :key="item.id">
 			<div class="c-item-block">
 				<div class="c-user-info">
 					<div class="c-avater">
 						<img :src="item.avatar" alt="avatar">
 					</div>
-					<span>{{item.username}}</span>
+					<span>{{item.name}}</span>
 				</div>
 				<div class="competition-info">
 					<p class="c-title">{{item.title}}</p>
-					<p class="c-des">{{item.description}}</p>
+					<p class="c-des">{{item.intro}}</p>
 				</div>
 			</div>
 		</router-link>
@@ -21,10 +21,9 @@
 	export default {
 		name: 'contentList',
 		props: {
-			filter2: {
-				type: String,
-				default: '',
-			},
+			items: {
+				default: [],
+			}
 		},
 		data () {
 			return {
@@ -48,9 +47,6 @@
 		},
 
 		methods: {
-			items () {
-				return JSON.parse(this.competitions)
-			}
 		}
 	}
 </script>

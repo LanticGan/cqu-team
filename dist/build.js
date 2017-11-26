@@ -13002,16 +13002,71 @@ if (false) {(function () {
 	name: 'team',
 	data() {
 		return {
-			filter: {
-				filter1: '',
-				filter2: ''
-			}
+			groupsList: [],
+			// contents filter params
+			wd: '',
+			sort: 'late',
+			type: '',
+			page: 0,
+
+			//scroll property
+			scrollTop: -1,
+			bodyTop: -1,
+			showLoadMore: false,
+			noMoredata: false
 		};
 	},
+
+	created() {
+		this.fetchData();
+	},
+
 	methods: {
-		getFilter(val) {
-			console.log(val);
-		}
+		fetchData() {
+			let that = this;
+			let params = {
+				wd: this.wd,
+				sort: this.sort,
+				type: this.type,
+				page: this.page
+			};
+
+			// 如果page为0则重置列表，否则在列表末尾添加
+			if (this.page == 0) {
+				this.competitionsList = [];
+			}
+
+			ajax.send('GET', '/api/groups', params, function (err, response) {
+				if (err) {
+					return;
+				} else {
+					let groups = JSON.parse(response).data;
+					if (groups) {
+						groups.forEach(function (item) {
+							item.url = {
+								name: 'content',
+								params: {
+									contentId: `${item.id}`
+								}
+							};
+						});
+					}
+					that.updateData(groups);
+				}
+			});
+		},
+
+		updateData(data) {
+			this.groupsList = this.groupsList.concat(data);
+			console.log(this.groupsList);
+		},
+
+		changeName() {},
+
+		changeFilter() {},
+
+		changeType() {}
+
 	},
 	components: {
 		searchBar: __WEBPACK_IMPORTED_MODULE_1__components_search_vue__["a" /* default */],
@@ -13056,9 +13111,8 @@ if (false) {(function () {
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'contentList',
 	props: {
-		filter2: {
-			type: String,
-			default: ''
+		items: {
+			default: []
 		}
 	},
 	data() {
@@ -13080,11 +13134,7 @@ if (false) {(function () {
 		};
 	},
 
-	methods: {
-		items() {
-			return JSON.parse(this.competitions);
-		}
-	}
+	methods: {}
 });
 
 /***/ }),
@@ -13099,7 +13149,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "content-list" },
-    _vm._l(_vm.itemsa, function(item) {
+    _vm._l(_vm.items, function(item) {
       return _c(
         "router-link",
         { key: item.id, staticClass: "content-item", attrs: { to: item.url } },
@@ -13110,15 +13160,13 @@ var render = function() {
                 _c("img", { attrs: { src: item.avatar, alt: "avatar" } })
               ]),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(item.username))])
+              _c("span", [_vm._v(_vm._s(item.name))])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "competition-info" }, [
               _c("p", { staticClass: "c-title" }, [_vm._v(_vm._s(item.title))]),
               _vm._v(" "),
-              _c("p", { staticClass: "c-des" }, [
-                _vm._v(_vm._s(item.description))
-              ])
+              _c("p", { staticClass: "c-des" }, [_vm._v(_vm._s(item.intro))])
             ])
           ])
         ]
@@ -13151,11 +13199,13 @@ var render = function() {
     [
       _c("my-header", { attrs: { headerName: "组队信息" } }),
       _vm._v(" "),
-      _c("search-bar", { on: { searchActive: _vm.getFilter } }),
+      _c("search-bar", { on: { searchActive: _vm.changeName } }),
       _vm._v(" "),
-      _c("tabBar", { on: { filterActive: _vm.getFilter } }),
+      _c("tabBar", {
+        on: { filterActive: _vm.changeFilter, typeActive: _vm.changeType }
+      }),
       _vm._v(" "),
-      _c("content-list", _vm._b({}, "content-list", _vm.filter, false)),
+      _c("content-list", { attrs: { items: _vm.groupsList } }),
       _vm._v(" "),
       _c("footer-tab")
     ],
@@ -13335,9 +13385,14 @@ if (false) {(function () {
 				if (res.status == 'error') {
 					window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id=86705621eba5382a&redirect_uri=http://f.yiban.cn/iapp171981";
 				} else {
+					console.log(res.data.id);
 					that.name = res.data.name;
 					that.avatar = res.data.avatar;
-					that.resume = JSON.stringify(res.data.resume);
+					if (res.data.resume == null) {
+						that.resume = JSON.stringify(res.data.resume);
+					} else {
+						that.resume = res.data.resume;
+					}
 				}
 			});
 		}
@@ -13732,10 +13787,10 @@ if (false) {(function () {
 			this.teammates.forEach(function (item) {
 				membersId.push(item.userId);
 			});
-			let contact = `number:${this.number}&qq:${this.qq}&wechat:${this.wechat}`;
+			let contact = `number:${this.number}qq:${this.qq}wechat:${this.wechat}`;
 			let data = {
 				title: this.title,
-				intro: '',
+				intro: this.text,
 				compet: {
 					name: this.competitionName,
 					type: this.type,
@@ -13746,7 +13801,12 @@ if (false) {(function () {
 				members: membersId,
 				contact: contact
 			};
-			console.log(data);
+			ajax.send('POST', '/api/groups', data, function (err, data) {
+				if (err) {
+					return;
+				}
+				console.log('post sucess!');
+			});
 		},
 
 		// Show teammates components 
@@ -13877,7 +13937,7 @@ if (false) {(function () {
 	data() {
 		return {
 			users: [{
-				userId: 1,
+				userId: '2VNN85X5M3HE3PYPP824FDXXR6',
 				userName: '甘宇廷',
 				userAvatar: 'src/assets/img/test-avatar.png',
 				userDes: '66666666666666666666666666666666666',
