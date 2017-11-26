@@ -1,7 +1,7 @@
 <template>
 	<div class="content-block">
 		<div class="cb-title">
-			{{title}}
+			APP设计大赛求大佬带飞
 		</div>
 
 		<div class="cb-team-leader">
@@ -13,12 +13,12 @@
 				<div class="m-item-block" style="padding: 0;border:0;">
 					<div class="m-user-info">
 						<div class="m-avater">
-							<img src="src/assets/img/test-avatar.png" alt="avatar">
+							<img src="src/assets/img/test.jpg" alt="avatar">
 						</div>
 					</div>
 					<div class="m-resume">
 						<p class="m-title" style="font-size:1em;">甘宇廷</p>
-						<p class="m-des">66666666666666666666666666666666666</p>
+						<p class="m-des">计算机学院大三学生，擅长抱大腿</p>
 					</div>
 					<div class="right-arrow" style="width:20px;height:20px;">
 						<img src="src/assets/img/right-arrow.png" alt="" style="width:100%;">	
@@ -34,13 +34,13 @@
 			</div>
 			<div class="weui-article">
 				<p>比赛名称:</p>
-				<p>aaa</p>
+				<p>APP设计大赛</p>
 				<p>比赛类别:</p>
-				<p>aaa</p>
+				<p>应用开发</p>
 				<p>比赛截止时间:</p>
-				<p>bbb</p>
+				<p>2017年11月30日</p>
 				<p>比赛详情:</p>
-				<p><a href="#">url</a></p>
+				<p><a href="#">点我</a></p>
 			</div>
 		</div>
 
@@ -50,7 +50,7 @@
 				<span>招募需求</span>
 			</div>
 			<div class="weui-article">
-				<p>ccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac</p>
+				<p>二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。</p>
 			</div>
 		</div>
 
@@ -90,7 +90,7 @@
 				required: true,
 			},
 			title: {
-				default: '计算机设计大赛',
+				default: '',
 			},
 			competitionName: {
 				default: 'xxx',
@@ -108,14 +108,14 @@
 					{
 						userId: 1,
 						userName: '甘宇廷',
-						userAvatar: 'src/assets/img/test-avatar.png',
+						userAvatar: 'src/assets/img/test.jpg',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					},
 					{
 						userId: 2,
 						userName: '姚裕欣',
-						userAvatar: 'src/assets/img/test-avatar.png',
+						userAvatar: 'src/assets/img/test2.png',
 						userDes: '66666666666666666666666666666666666',
 						userSelected: false
 					}

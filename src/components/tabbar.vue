@@ -131,6 +131,13 @@
 
 
 	$type-item-height: 1.5em;
+
+	@media screen and (max-width: 372px) {
+		.type-item {
+			font-size: 0.8em;
+		}
+	}
+
 	.hidden {
 		display: none;
 	}
@@ -143,6 +150,7 @@
 				text-align: center;
 				margin: 10px 6px;
 				line-height: $type-item-height;
+				height: $type-item-height;
 				border:1px solid #E5E5E5;
 				border-radius:5px;
 				padding:5px;

@@ -2,10 +2,10 @@
 	<div class="user-info">
 		<my-header headerName="个人主页"></my-header>
 		<div class="user-avatar">
-			<img src="src/assets/img/favicon.jpg" alt="avatar" id="ava">
+			<img src="src/assets/img/test.jpg" alt="avatar" id="ava">
 		</div>
 		<div class="user-name">
-			Lantic
+			{{name}}
 		</div>
 		
 		<div class="p-resume">
@@ -16,7 +16,7 @@
 				>{{editText}}</span>
 			</div>
 			<div class="resume-text">
-				<p v-show="!editActive">{{resume}}</p>
+				<p v-show="!editActive">计算机学院大三学生，擅长抱大腿</p>
 
 				<div class="weui-cell" v-show="editActive">
 		            <div class="weui-cell__bd">
@@ -46,9 +46,14 @@
 	import contentList from './content-list.vue'
 	export default {
 		name: 'person',
+		mounted () {
+			this.fetchUserData()
+		},
 		data () {
 			return {
-				resume: '计算机学院大三学生',
+				avatar: '', 
+				name: 'text',
+				resume: '计算机学院大三学生，擅长抱大腿',
 				maxLength: 100,
 				editActive: false,
 				editText: '编辑',
@@ -56,24 +61,46 @@
 		},
 		methods: {
 			editAndPost () {
-				let editResume = document.getElementById('edit-resume');
+				let [that, editResume] = [this, document.getElementById('edit-resume')];
 				if (this.editText == '完成') {
+					let resumeText = this.resume
+					ajax.send('PUT', '/api/self', {resume: resumeText}, function (err, res) {
+						if (err) { return }
+						console.log(res)
+					})
 					this.editText = '编辑'
 					editResume.blur()
-					console.log('posting')
 				} else {
 					editResume.focus()
 					this.editText = '完成'
 				}
 
 				this.editActive = !this.editActive
-			}
+			},
+
+			fetchUserData () {
+				let [that, data] = [this, {}];
+				ajax.send('GET', '/api/self', data, function (err, response) {
+					if (err) { return }
+					let res = JSON.parse(response);
+					if (res.status == 'error') { 
+						window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id=86705621eba5382a&redirect_uri=http://f.yiban.cn/iapp171981"
+					} else {
+						that.name = res.data.name
+						that.avatar = res.data.avatar
+						that.resume = JSON.stringify(res.data.resume)
+					}
+				})
+			},
+
 		},
+
 		computed: {
 			disabled () {
 				return this.resume.length == this.maxLength ? true : false
 			}
 		},
+
 		components: {
 			footerTab,
 			myHeader,

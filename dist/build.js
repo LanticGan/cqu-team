@@ -12695,7 +12695,7 @@ if (false) {(function () {
 			required: true
 		},
 		title: {
-			default: '计算机设计大赛'
+			default: ''
 		},
 		competitionName: {
 			default: 'xxx'
@@ -12712,13 +12712,13 @@ if (false) {(function () {
 			teammates: [{
 				userId: 1,
 				userName: '甘宇廷',
-				userAvatar: 'src/assets/img/test-avatar.png',
+				userAvatar: 'src/assets/img/test.jpg',
 				userDes: '66666666666666666666666666666666666',
 				userSelected: false
 			}, {
 				userId: 2,
 				userName: '姚裕欣',
-				userAvatar: 'src/assets/img/test-avatar.png',
+				userAvatar: 'src/assets/img/test2.png',
 				userDes: '66666666666666666666666666666666666',
 				userSelected: false
 			}]
@@ -12737,9 +12737,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content-block" }, [
-    _c("div", { staticClass: "cb-title" }, [
-      _vm._v("\n\t\t" + _vm._s(_vm.title) + "\n\t")
-    ]),
+    _c("div", { staticClass: "cb-title" }, [_vm._v("\n\t\tAPP设计大赛求大佬带飞\n\t")]),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
@@ -12792,10 +12790,7 @@ var staticRenderFns = [
             _c("div", { staticClass: "m-user-info" }, [
               _c("div", { staticClass: "m-avater" }, [
                 _c("img", {
-                  attrs: {
-                    src: "src/assets/img/test-avatar.png",
-                    alt: "avatar"
-                  }
+                  attrs: { src: "src/assets/img/test.jpg", alt: "avatar" }
                 })
               ])
             ]),
@@ -12807,9 +12802,7 @@ var staticRenderFns = [
                 [_vm._v("甘宇廷")]
               ),
               _vm._v(" "),
-              _c("p", { staticClass: "m-des" }, [
-                _vm._v("66666666666666666666666666666666666")
-              ])
+              _c("p", { staticClass: "m-des" }, [_vm._v("计算机学院大三学生，擅长抱大腿")])
             ]),
             _vm._v(" "),
             _c(
@@ -12846,19 +12839,19 @@ var staticRenderFns = [
       _c("div", { staticClass: "weui-article" }, [
         _c("p", [_vm._v("比赛名称:")]),
         _vm._v(" "),
-        _c("p", [_vm._v("aaa")]),
+        _c("p", [_vm._v("APP设计大赛")]),
         _vm._v(" "),
         _c("p", [_vm._v("比赛类别:")]),
         _vm._v(" "),
-        _c("p", [_vm._v("aaa")]),
+        _c("p", [_vm._v("应用开发")]),
         _vm._v(" "),
         _c("p", [_vm._v("比赛截止时间:")]),
         _vm._v(" "),
-        _c("p", [_vm._v("bbb")]),
+        _c("p", [_vm._v("2017年11月30日")]),
         _vm._v(" "),
         _c("p", [_vm._v("比赛详情:")]),
         _vm._v(" "),
-        _c("p", [_c("a", { attrs: { href: "#" } }, [_vm._v("url")])])
+        _c("p", [_c("a", { attrs: { href: "#" } }, [_vm._v("点我")])])
       ])
     ])
   },
@@ -12874,9 +12867,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "weui-article" }, [
-        _c("p", [
-          _vm._v("ccaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac")
-        ])
+        _c("p", [_vm._v("二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。")])
       ])
     ])
   },
@@ -13075,9 +13066,9 @@ if (false) {(function () {
 			itemsa: [{
 				id: 1,
 				username: '甘宇廷',
-				avatar: 'src/assets/img/test-avatar.png',
-				title: '计算机设计大赛',
-				description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
+				avatar: 'src/assets/img/test.jpg',
+				title: 'APP设计大赛求大佬带飞',
+				description: '二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。',
 				url: {
 					name: 'content',
 					params: {
@@ -13300,9 +13291,14 @@ if (false) {(function () {
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 	name: 'person',
+	mounted() {
+		this.fetchUserData();
+	},
 	data() {
 		return {
-			resume: '计算机学院大三学生',
+			avatar: '',
+			name: 'text',
+			resume: '计算机学院大三学生，擅长抱大腿',
 			maxLength: 100,
 			editActive: false,
 			editText: '编辑'
@@ -13310,24 +13306,50 @@ if (false) {(function () {
 	},
 	methods: {
 		editAndPost() {
-			let editResume = document.getElementById('edit-resume');
+			let [that, editResume] = [this, document.getElementById('edit-resume')];
 			if (this.editText == '完成') {
+				let resumeText = this.resume;
+				ajax.send('PUT', '/api/self', { resume: resumeText }, function (err, res) {
+					if (err) {
+						return;
+					}
+					console.log(res);
+				});
 				this.editText = '编辑';
 				editResume.blur();
-				console.log('posting');
 			} else {
 				editResume.focus();
 				this.editText = '完成';
 			}
 
 			this.editActive = !this.editActive;
+		},
+
+		fetchUserData() {
+			let [that, data] = [this, {}];
+			ajax.send('GET', '/api/self', data, function (err, response) {
+				if (err) {
+					return;
+				}
+				let res = JSON.parse(response);
+				if (res.status == 'error') {
+					window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id=86705621eba5382a&redirect_uri=http://f.yiban.cn/iapp171981";
+				} else {
+					that.name = res.data.name;
+					that.avatar = res.data.avatar;
+					that.resume = JSON.stringify(res.data.resume);
+				}
+			});
 		}
+
 	},
+
 	computed: {
 		disabled() {
 			return this.resume.length == this.maxLength ? true : false;
 		}
 	},
+
 	components: {
 		footerTab: __WEBPACK_IMPORTED_MODULE_0__components_footer_vue__["a" /* default */],
 		myHeader: __WEBPACK_IMPORTED_MODULE_1__components_header_vue__["a" /* default */],
@@ -13352,7 +13374,9 @@ var render = function() {
       _vm._v(" "),
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "user-name" }, [_vm._v("\n\t\tLantic\n\t")]),
+      _c("div", { staticClass: "user-name" }, [
+        _vm._v("\n\t\t" + _vm._s(_vm.name) + "\n\t")
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "p-resume" }, [
         _c("div", { staticClass: "p-block-description" }, [
@@ -13390,7 +13414,7 @@ var render = function() {
                 }
               ]
             },
-            [_vm._v(_vm._s(_vm.resume))]
+            [_vm._v("计算机学院大三学生，擅长抱大腿")]
           ),
           _vm._v(" "),
           _c(
@@ -13463,7 +13487,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "user-avatar" }, [
       _c("img", {
-        attrs: { src: "src/assets/img/favicon.jpg", alt: "avatar", id: "ava" }
+        attrs: { src: "src/assets/img/test.jpg", alt: "avatar", id: "ava" }
       })
     ])
   },
@@ -13959,7 +13983,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "weui-input",
-                attrs: { placeholder: "一个好的标题才能吸引大佬哦" },
+                attrs: { placeholder: "一个好的标题才能吸引大佬哦", required: "true" },
                 domProps: { value: _vm.title },
                 on: {
                   input: function($event) {
@@ -13987,7 +14011,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "weui-input",
-                attrs: { placeholder: "您要参加的比赛" },
+                attrs: { placeholder: "您要参加的比赛", required: "true" },
                 domProps: { value: _vm.competitionName },
                 on: {
                   input: function($event) {
@@ -14037,7 +14061,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "weui-input",
-                attrs: { type: "date" },
+                attrs: { type: "date", required: "true" },
                 domProps: { value: _vm.deadline },
                 on: {
                   input: function($event) {
@@ -14051,10 +14075,12 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "weui-cell", on: { click: _vm.showSelect } },
-            [_vm._m(4), _vm._v(" "), _vm._m(5)]
+            [_vm._m(5), _vm._v(" "), _vm._m(6)]
           ),
           _vm._v(" "),
           _c(
@@ -14069,8 +14095,6 @@ var render = function() {
               ])
             })
           ),
-          _vm._v(" "),
-          _vm._m(6),
           _vm._v(" "),
           _c("div", { staticClass: "weui-cell" }, [
             _c("div", { staticClass: "weui-cell__bd" }, [
@@ -14186,6 +14210,23 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "weui-cell" }, [
+      _c("div", { staticClass: "weui-cell__hd" }, [
+        _c("label", { staticClass: "weui-label" }, [_vm._v("联系方式")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "weui-cell__bd" }, [
+        _c("input", {
+          staticClass: "weui-input",
+          attrs: { placeholder: "请留下您的联系方式" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "weui-cell__hd" }, [
       _c("label", { staticClass: "weui-label" }, [_vm._v("团队成员")])
     ])
@@ -14199,23 +14240,6 @@ var staticRenderFns = [
         staticClass: "weui-input",
         attrs: { type: "text", placeholder: "点击配置团队现有成员", disabled: "disabled" }
       })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "weui-cell" }, [
-      _c("div", { staticClass: "weui-cell__hd" }, [
-        _c("label", { staticClass: "weui-label" }, [_vm._v("qq")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "weui-cell__bd" }, [
-        _c("input", {
-          staticClass: "weui-input",
-          attrs: { placeholder: "您要参加的比赛" }
-        })
-      ])
     ])
   }
 ]

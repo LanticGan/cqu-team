@@ -32,9 +32,9 @@
 					{
 						id:1,
 						username: '甘宇廷',
-						avatar: 'src/assets/img/test-avatar.png',
-						title: '计算机设计大赛',
-						description: '三缺一，求编程大佬一枚三缺一，啊啊啊啊啊啊编程大佬一编程大佬一枚枚求编程大佬一枚啊啊啊啊啊',
+						avatar: 'src/assets/img/test.jpg',
+						title: 'APP设计大赛求大佬带飞',
+						description: '二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。',
 						url: {
 							name: 'content',
 							params: {

@@ -5,13 +5,13 @@
 			<div class="weui-cell">
 		            <div class="weui-cell__hd"><label class="weui-label">招募标题</label></div>
 		            <div class="weui-cell__bd">
-		                <input v-model="title" class="weui-input"  placeholder="一个好的标题才能吸引大佬哦">
+		                <input v-model="title" class="weui-input"  placeholder="一个好的标题才能吸引大佬哦" required="true">
 		            </div>
 		    </div>
 			<div class="weui-cell">
 	            <div class="weui-cell__hd"><label class="weui-label">比赛名称</label></div>
 	            <div class="weui-cell__bd">
-	                <input v-model="competitionName" class="weui-input"  placeholder="您要参加的比赛">
+	                <input v-model="competitionName" class="weui-input"  placeholder="您要参加的比赛" required="true">
 	            </div>
 	        </div>
 	        <div class="weui-cell" @click="typePicker" style="height:43.53px; box-sizing: border-box; line-height:23.525px;">
@@ -25,9 +25,15 @@
 	        <div class="weui-cell">
 	                <div class="weui-cell__hd"><label for="" class="weui-label">截止日期</label></div>
 	                <div class="weui-cell__bd">
-	                    <input class="weui-input" type="date" v-model="deadline">
+	                    <input class="weui-input" type="date" v-model="deadline" required="true">
 	                </div>
-	        </div> 
+	        </div>
+	        <div class="weui-cell">
+	            <div class="weui-cell__hd"><label class="weui-label">联系方式</label></div>
+	            <div class="weui-cell__bd">
+	                <input class="weui-input"  placeholder="请留下您的联系方式">
+	            </div>
+	        </div>
 	        <div class="weui-cell" @click="showSelect">
 	            <div class="weui-cell__hd">
 	            	<label class="weui-label">团队成员</label>
@@ -40,12 +46,6 @@
 		        <div class="team-member-item" v-for="member in teammates">
 		        		<img :src="member.userAvatar" alt="">
 		        </div>
-	        </div>
-	        <div class="weui-cell">
-	            <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
-	            <div class="weui-cell__bd">
-	                <input class="weui-input"  placeholder="您要参加的比赛">
-	            </div>
 	        </div>
 	        <div class="weui-cell">
 	            <div class="weui-cell__bd">
