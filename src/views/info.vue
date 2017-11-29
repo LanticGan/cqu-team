@@ -102,7 +102,7 @@
 					} else {
 						if (that.scrollTop > 0 && unlock) {
 							that.page += 1;
-							this.fetchData()
+							that.fetchData()
 							// 加锁，防止一直加载，影响体验。
 							unlock = false;
 							// 2s后解锁。

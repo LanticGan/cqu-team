@@ -11881,7 +11881,7 @@ if (false) {(function () {
 				} else {
 					if (that.scrollTop > 0 && unlock) {
 						that.page += 1;
-						this.fetchData();
+						that.fetchData();
 						// 加锁，防止一直加载，影响体验。
 						unlock = false;
 						// 2s后解锁。
@@ -12983,6 +12983,13 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13012,25 +13019,18 @@ if (false) {(function () {
 		this.fetchData();
 	},
 
+	mounted() {
+		this.scroll();
+	},
+
 	watch: {
-		'$route': 'fetchData',
-
-		'sort': function () {
-			this.fetchData();
-		},
-
-		'type': function () {
-			this.fetchData();
-		},
-
-		'wd': function () {
-			this.fetchData();
-		}
-
+		'$route': 'fetchData'
 	},
 
 	methods: {
 		fetchData() {
+			this.showLoadMore = true;
+			this.noMoredata = false;
 			let that = this;
 			let params = {
 				wd: this.wd,
@@ -13048,9 +13048,8 @@ if (false) {(function () {
 				if (err) {
 					return;
 				} else {
-					console.log(response);
 					let groups = JSON.parse(response).data;
-					if (groups) {
+					if (groups.length) {
 						groups.forEach(function (item) {
 							item.url = {
 								name: 'content',
@@ -13059,19 +13058,26 @@ if (false) {(function () {
 								}
 							};
 						});
+						that.updateData(groups);
+					} else {
+						that.noMoredata = true;
+						that.showLoadMore = false;
 					}
-					that.updateData(groups);
 				}
 			});
 		},
 
 		updateData(data) {
+			this.showLoadMore = false;
 			this.groupsList = this.groupsList.concat(data);
-			console.log(this.groupsList);
 		},
 
 		changeName(name) {
+			this.page = 0;
+			this.sort = 'late';
+			this.type = '';
 			this.wd = name;
+			this.fetchData();
 		},
 
 		changeFilter(condition) {
@@ -13080,6 +13086,9 @@ if (false) {(function () {
 			} else if (condition == 'hot') {
 				this.sort = 'hot';
 			}
+			this.wd = '';
+			this.page = 0;
+			this.fetchData();
 		},
 
 		changeType(type) {
@@ -13088,9 +13097,38 @@ if (false) {(function () {
 			} else {
 				this.type = type;
 			}
-		}
+			this.wd = '';
+			this.page = 0;
+			this.fetchData();
+		},
 
+		scroll() {
+			let that = this;
+			let scrollCarrier = document.getElementById('team');
+			//初始化锁
+			let unlock = true;
+			scrollCarrier.addEventListener('touchmove', function () {
+				// safari浏览器document.documentElement.scrollTop一直为0, 而其余大多浏览器document.body.scrollTop一直为0，这行代码解决了这个问题，太优雅了。
+				let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+				// 判断是否拉到底部
+				if (that.scrollTop != scrollTop) {
+					that.scrollTop = scrollTop;
+				} else {
+					if (that.scrollTop > 0 && unlock) {
+						that.page += 1;
+						that.fetchData();
+						// 加锁，防止一直加载，影响体验。
+						unlock = false;
+						// 2s后解锁。
+						setTimeout(() => {
+							unlock = true;
+						}, 2000);
+					}
+				}
+			});
+		}
 	},
+
 	components: {
 		searchBar: __WEBPACK_IMPORTED_MODULE_1__components_search_vue__["a" /* default */],
 		contentList: __WEBPACK_IMPORTED_MODULE_0__content_list_vue__["a" /* default */],
@@ -13221,6 +13259,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { attrs: { id: "team" } },
     [
       _c("my-header", { attrs: { headerName: "组队信息" } }),
       _vm._v(" "),
@@ -13231,6 +13270,42 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("content-list", { attrs: { items: _vm.groupsList } }),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.showLoadMore,
+              expression: "showLoadMore"
+            }
+          ],
+          staticClass: "weui-loadmore"
+        },
+        [
+          _c("i", { staticClass: "weui-loading" }),
+          _vm._v(" "),
+          _c("span", { staticClass: "weui-loadmore__tips" }, [_vm._v("正在加载")])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.noMoredata,
+              expression: "noMoredata"
+            }
+          ],
+          staticClass: "weui-loadmore weui-loadmore_line"
+        },
+        [_c("span", { staticClass: "weui-loadmore__tips" }, [_vm._v("暂无数据")])]
+      ),
       _vm._v(" "),
       _c("footer-tab")
     ],
