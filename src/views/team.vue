@@ -37,6 +37,23 @@
 			this.fetchData()
 		},
 
+	watch: {
+		'$route': 'fetchData',
+
+		'sort': function() {
+			this.fetchData()
+		},
+
+		'type': function() {
+			this.fetchData()
+		},
+
+		'wd': function () {
+			this.fetchData()
+		},
+
+	},
+
 		methods: {
 			fetchData () {
 				let that = this;
@@ -49,13 +66,14 @@
 
 				// 如果page为0则重置列表，否则在列表末尾添加
 				if (this.page == 0) {
-					this.competitionsList = []
+					this.groupsList = []
 				}
 
 				ajax.send('GET', '/api/groups', params, function (err, response){
 					if (err) {
 						return
 					} else {
+						console.log(response)
 						let groups = JSON.parse(response).data;
 						if (groups) {
 							groups.forEach(function (item) {
@@ -77,11 +95,27 @@
 				console.log(this.groupsList)
 			},
 
-			changeName () {},
+			changeName (name) {
+				this.wd = name
+			},
 
-			changeFilter () {},
+			changeFilter (condition) {
+				if (condition == 'time') {
+					this.sort = 'late'
+				}
 
-			changeType () {},
+				else if (condition == 'hot') {
+					this.sort = 'hot'
+				}
+			},
+
+			changeType (type) {
+				if (type == '全部') {
+					this.type = ''
+				} else {
+					this.type = type
+				}
+			},
 
 		},
 		components: {

@@ -22,7 +22,9 @@
 		name: 'contentList',
 		props: {
 			items: {
-				default: [],
+				default: function () {
+					return []
+				}
 			}
 		},
 		data () {

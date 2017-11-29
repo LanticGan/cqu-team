@@ -11831,27 +11831,7 @@ if (false) {(function () {
 	},
 
 	watch: {
-		'$route': 'fetchData',
-
-		'th': function () {
-			//  重置
-			this.page = 1;
-			this.name = 0;
-			this.fetchData();
-		},
-
-		'type': function () {
-			this.name = 0;
-			this.page = 1;
-			this.fetchData();
-		},
-
-		'name': function () {
-			this.page = 1;
-			this.fetchData();
-		},
-
-		'page': 'fetchData'
+		'$route': 'fetchData'
 	},
 
 	methods: {
@@ -11861,6 +11841,10 @@ if (false) {(function () {
 			} else if (condition == 'hot') {
 				this.th = 1;
 			}
+			// 每次重新点击都要初始化
+			this.name = 0;
+			this.page = 1;
+			this.fetchData();
 		},
 
 		changeType(type) {
@@ -11870,29 +11854,61 @@ if (false) {(function () {
 			} else {
 				this.type = type;
 			}
+			this.name = 0;
+			this.page = 1;
+			this.fetchData();
 		},
 
 		changeName(name) {
+			this.type = 0;
+			this.th = 0;
+			this.page = 1;
 			this.name = name;
+			this.fetchData();
 		},
 
-		fetchData() {
+		scroll() {
+			let that = this;
+			let scrollCarrier = document.getElementById('info');
+			//初始化锁
+			let unlock = true;
+			scrollCarrier.addEventListener('touchmove', function () {
+				// safari浏览器document.documentElement.scrollTop一直为0, 而其余大多浏览器document.body.scrollTop一直为0，这行代码解决了这个问题，太优雅了。
+				let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+				// 判断是否拉到底部
+				if (that.scrollTop != scrollTop) {
+					that.scrollTop = scrollTop;
+				} else {
+					if (that.scrollTop > 0 && unlock) {
+						that.page += 1;
+						this.fetchData();
+						// 加锁，防止一直加载，影响体验。
+						unlock = false;
+						// 2s后解锁。
+						setTimeout(() => {
+							unlock = true;
+						}, 2000);
+					}
+				}
+			});
+		},
+
+		fetchData(param) {
 			this.showLoadMore = true;
 			this.noMoredata = false;
 			let that = this;
-			let params = {
+			let queryString = {
 				th: this.th,
+				name: this.name,
 				type: this.type,
-				page: this.page,
-				name: this.name
+				page: this.page
 			};
 
-			// 如果page为1则重置列表，否则在列表末尾添加
 			if (this.page == 1) {
 				this.competitionsList = [];
 			}
 
-			ajax.send('GET', '/djangoapi/competitions', params, function (err, res) {
+			ajax.send('GET', '/djangoapi/competitions', queryString, function (err, res) {
 				if (err) {
 					return;
 				} else {
@@ -11922,31 +11938,6 @@ if (false) {(function () {
 		updateData(data) {
 			this.showLoadMore = false;
 			this.competitionsList = this.competitionsList.concat(data);
-		},
-
-		scroll() {
-			let that = this;
-			let scrollCarrier = document.getElementById('info');
-			//初始化锁
-			let unlock = true;
-			scrollCarrier.addEventListener('touchmove', function () {
-				// safari浏览器document.documentElement.scrollTop一直为0, 而其余大多浏览器document.body.scrollTop一直为0，这行代码解决了这个问题，太优雅了。
-				let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
-				// 判断是否拉到底部
-				if (that.scrollTop != scrollTop) {
-					that.scrollTop = scrollTop;
-				} else {
-					if (that.scrollTop > 0 && unlock) {
-						that.page += 1;
-						// 加锁，防止一直加载，影响体验。
-						unlock = false;
-						// 2s后解锁。
-						setTimeout(() => {
-							unlock = true;
-						}, 2000);
-					}
-				}
-			});
 		}
 
 	},
@@ -13021,6 +13012,23 @@ if (false) {(function () {
 		this.fetchData();
 	},
 
+	watch: {
+		'$route': 'fetchData',
+
+		'sort': function () {
+			this.fetchData();
+		},
+
+		'type': function () {
+			this.fetchData();
+		},
+
+		'wd': function () {
+			this.fetchData();
+		}
+
+	},
+
 	methods: {
 		fetchData() {
 			let that = this;
@@ -13033,13 +13041,14 @@ if (false) {(function () {
 
 			// 如果page为0则重置列表，否则在列表末尾添加
 			if (this.page == 0) {
-				this.competitionsList = [];
+				this.groupsList = [];
 			}
 
 			ajax.send('GET', '/api/groups', params, function (err, response) {
 				if (err) {
 					return;
 				} else {
+					console.log(response);
 					let groups = JSON.parse(response).data;
 					if (groups) {
 						groups.forEach(function (item) {
@@ -13061,11 +13070,25 @@ if (false) {(function () {
 			console.log(this.groupsList);
 		},
 
-		changeName() {},
+		changeName(name) {
+			this.wd = name;
+		},
 
-		changeFilter() {},
+		changeFilter(condition) {
+			if (condition == 'time') {
+				this.sort = 'late';
+			} else if (condition == 'hot') {
+				this.sort = 'hot';
+			}
+		},
 
-		changeType() {}
+		changeType(type) {
+			if (type == '全部') {
+				this.type = '';
+			} else {
+				this.type = type;
+			}
+		}
 
 	},
 	components: {
@@ -13112,7 +13135,9 @@ if (false) {(function () {
 	name: 'contentList',
 	props: {
 		items: {
-			default: []
+			default: function () {
+				return [];
+			}
 		}
 	},
 	data() {
@@ -13348,7 +13373,7 @@ if (false) {(function () {
 		return {
 			avatar: '',
 			name: 'text',
-			resume: '计算机学院大三学生，擅长抱大腿',
+			resume: '',
 			maxLength: 100,
 			editActive: false,
 			editText: '编辑'
@@ -13385,7 +13410,6 @@ if (false) {(function () {
 				if (res.status == 'error') {
 					window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id=86705621eba5382a&redirect_uri=http://f.yiban.cn/iapp171981";
 				} else {
-					console.log(res.data.id);
 					that.name = res.data.name;
 					that.avatar = res.data.avatar;
 					if (res.data.resume == null) {
@@ -13427,7 +13451,9 @@ var render = function() {
     [
       _c("my-header", { attrs: { headerName: "个人主页" } }),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "user-avatar" }, [
+        _c("img", { attrs: { src: _vm.avatar, alt: "avatar", id: "ava" } })
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "user-name" }, [
         _vm._v("\n\t\t" + _vm._s(_vm.name) + "\n\t")
@@ -13469,7 +13495,7 @@ var render = function() {
                 }
               ]
             },
-            [_vm._v("计算机学院大三学生，擅长抱大腿")]
+            [_vm._v(_vm._s(_vm.resume))]
           ),
           _vm._v(" "),
           _c(
@@ -13526,7 +13552,7 @@ var render = function() {
       _c(
         "div",
         { staticClass: "p-posted" },
-        [_vm._m(1), _vm._v(" "), _c("content-list")],
+        [_vm._m(0), _vm._v(" "), _c("content-list")],
         1
       ),
       _vm._v(" "),
@@ -13536,16 +13562,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "user-avatar" }, [
-      _c("img", {
-        attrs: { src: "src/assets/img/test.jpg", alt: "avatar", id: "ava" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

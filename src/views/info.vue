@@ -51,26 +51,6 @@
 
 		watch: {
 			'$route': 'fetchData',
-
-			'th': function () {
-				//  重置
-				this.page = 1
-				this.name = 0
-				this.fetchData()
-			},
-
-			'type': function () {
-				this.name = 0
-				this.page = 1
-				this.fetchData()
-			},
-
-			'name': function () {
-				this.page = 1
-				this.fetchData()
-			},
-
-			'page': 'fetchData',
 		},
 
 		methods: {
@@ -82,6 +62,10 @@
 				else if (condition == 'hot') {
 					this.th = 1
 				}
+				// 每次重新点击都要初始化
+				this.name = 0
+				this.page = 1
+				this.fetchData()
 			},
 
 			changeType (type) {
@@ -91,29 +75,59 @@
 				} else {
 					this.type = type
 				}
+				this.name = 0
+				this.page = 1
+				this.fetchData()
 			},
 
 			changeName (name) {
+				this.type = 0
+				this.th = 0
+				this.page = 1
 				this.name = name
+				this.fetchData()
 			},
 
-			fetchData () {
+			scroll () {
+				let that = this;
+				let scrollCarrier = document.getElementById('info');
+				//初始化锁
+				let unlock = true;
+				scrollCarrier.addEventListener('touchmove', function () {
+					// safari浏览器document.documentElement.scrollTop一直为0, 而其余大多浏览器document.body.scrollTop一直为0，这行代码解决了这个问题，太优雅了。
+					let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0
+					// 判断是否拉到底部
+					if (that.scrollTop != scrollTop) {
+						that.scrollTop = scrollTop
+					} else {
+						if (that.scrollTop > 0 && unlock) {
+							that.page += 1;
+							this.fetchData()
+							// 加锁，防止一直加载，影响体验。
+							unlock = false;
+							// 2s后解锁。
+							setTimeout(() => { unlock = true }, 2000)
+						}
+					}
+				})
+			},
+
+			fetchData (param) {
 				this.showLoadMore = true
 				this.noMoredata = false
 				let that = this;
-				let params = {
+				let queryString = {
 					th: this.th,
-					type: this.type,
-					page: this.page,
 					name: this.name,
+					type: this.type,
+					page: this.page
 				};
 
-				// 如果page为1则重置列表，否则在列表末尾添加
 				if (this.page == 1) {
 					this.competitionsList = []
-				} 
+				}
 
-				ajax.send('GET', '/djangoapi/competitions', params, function (err, res){
+				ajax.send('GET', '/djangoapi/competitions', queryString, function (err, res){
 					if (err) {
 						return
 					} else {
@@ -141,29 +155,6 @@
 			updateData (data) {
 				this.showLoadMore = false
 				this.competitionsList = this.competitionsList.concat(data)
-			},
-
-			scroll () {
-				let that = this;
-				let scrollCarrier = document.getElementById('info');
-				//初始化锁
-				let unlock = true;
-				scrollCarrier.addEventListener('touchmove', function () {
-					// safari浏览器document.documentElement.scrollTop一直为0, 而其余大多浏览器document.body.scrollTop一直为0，这行代码解决了这个问题，太优雅了。
-					let scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0
-					// 判断是否拉到底部
-					if (that.scrollTop != scrollTop) {
-						that.scrollTop = scrollTop
-					} else {
-						if (that.scrollTop > 0 && unlock) {
-							that.page += 1;
-							// 加锁，防止一直加载，影响体验。
-							unlock = false;
-							// 2s后解锁。
-							setTimeout(() => { unlock = true }, 2000)
-						}
-					}
-				})
 			},
 
 		},

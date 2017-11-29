@@ -2,7 +2,7 @@
 	<div class="user-info">
 		<my-header headerName="个人主页"></my-header>
 		<div class="user-avatar">
-			<img src="src/assets/img/test.jpg" alt="avatar" id="ava">
+			<img :src="avatar" alt="avatar" id="ava">
 		</div>
 		<div class="user-name">
 			{{name}}
@@ -16,7 +16,7 @@
 				>{{editText}}</span>
 			</div>
 			<div class="resume-text">
-				<p v-show="!editActive">计算机学院大三学生，擅长抱大腿</p>
+				<p v-show="!editActive">{{resume}}</p>
 
 				<div class="weui-cell" v-show="editActive">
 		            <div class="weui-cell__bd">
@@ -86,7 +86,6 @@
 					if (res.status == 'error') { 
 						window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id=86705621eba5382a&redirect_uri=http://f.yiban.cn/iapp171981"
 					} else {
-						console.log(res.data.id)
 						that.name = res.data.name
 						that.avatar = res.data.avatar
 						if (res.data.resume == null) {
