@@ -1,6 +1,6 @@
 <template>
 	<div class="team-members-search">
-		<searchBar></searchBar>
+		<searchBar @searchActive="changeName"></searchBar>
 		<div class="m-item-block" v-for="user in users">
 			<div class="m-user-info">
 				<div class="m-avater">
@@ -33,20 +33,6 @@
 		data () {
 			return {
 				users: [
-					{
-						userId: '2VNN85X5M3HE3PYPP824FDXXR6',
-						userName: '甘宇廷',
-						userAvatar: 'src/assets/img/test-avatar.png',
-						userDes: '66666666666666666666666666666666666',
-						userSelected: false
-					},
-					{
-						userId: 2,
-						userName: '姚裕欣',
-						userAvatar: 'src/assets/img/test-avatar.png',
-						userDes: '66666666666666666666666666666666666',
-						userSelected: false
-					}
 				]
 			}
 		},
@@ -66,6 +52,30 @@
 					}
 				})
 				this.$emit("confirmSelect", selectedUserAvatarList)
+			},
+
+			changeName (userName) {
+				let that = this;
+				let queryString = {
+					name: userName
+				}
+				ajax.send('GET', `/api/users`, queryString, function (err, res) {
+					if (err) { return }
+					let response = JSON.parse(res);
+					if (response.status = 'ok') {
+						let data = response.data;
+						for (let user of data) {
+							let tempUser = {};
+							tempUser.userId = user.id
+							tempUser.userName = user.name
+							tempUser.userAvatar = user.avatar
+							tempUser.userDes = user.resume
+							tempUser.userSelected = false
+							that.users.push(tempUser)
+							console.log(that.users)
+						}
+					}
+				})
 			}
 		},
 		components: {

@@ -6,6 +6,7 @@ import team from './views/team.vue'
 import person from './views/person.vue'
 import post from './views/post.vue'
 import competition from './views/competition.vue'
+import user from './views/user.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +43,12 @@ export default new Router({
 			component: competition,
 			props: true,
 		},
+		{
+			name: 'user',
+			path: '/user/:userId',
+			component: user,
+			props: true,
+		}
 
 	]
 })

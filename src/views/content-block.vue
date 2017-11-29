@@ -9,22 +9,24 @@
 				<img src="src/assets/img/team-leader.png" alt="">
 				<span>组队发起人</span>
 			</div>
-			<div class="cb-introduce">
-				<div class="m-item-block" style="padding: 0;border:0;">
-					<div class="m-user-info">
-						<div class="m-avater">
-							<img src="src/assets/img/test.jpg" alt="avatar">
+			<router-link :to = "'/user/' + founder.id">
+				<div class="cb-introduce">
+					<div class="m-item-block" style="padding: 0;border:0;">
+						<div class="m-user-info">
+							<div class="m-avater">
+								<img :src="founder.avatar" alt="avatar">
+							</div>
+						</div>
+						<div class="m-resume">
+							<p class="m-title" style="font-size:1em;">{{ founderName }}</p>
+							<p class="m-des">{{ founderResume }}</p>
+						</div>
+						<div class="right-arrow" style="width:20px;height:20px;">
+							<img src="src/assets/img/right-arrow.png" alt="" style="width:100%;">	
 						</div>
 					</div>
-					<div class="m-resume">
-						<p class="m-title" style="font-size:1em;">甘宇廷</p>
-						<p class="m-des">计算机学院大三学生，擅长抱大腿</p>
-					</div>
-					<div class="right-arrow" style="width:20px;height:20px;">
-						<img src="src/assets/img/right-arrow.png" alt="" style="width:100%;">	
-					</div>
 				</div>
-			</div>
+			</router-link>
 		</div>
 
 		<div class="cb-requirements">
@@ -56,10 +58,12 @@
 				<img src="src/assets/img/teammates.png" alt="">
 				<span>团队现有成员</span>
 			</div>
-			<div class="team-members" style="margin-left:15px;padding: 0.4em 0;">	
-		        <div class="team-member-item" v-for="member in members">
-		        		<img :src="member.avatar" alt="">
-		        </div>
+			<div class="team-members" style="margin-left:15px;padding: 0.4em 0;">
+				<router-link v-for="member in members" :to="'/user/' + member.id" :key="member.id">
+			       <div class="team-member-item">
+			       		<img :src="member.avatar" alt="">
+			       </div>
+		       </router-link>
 	        </div>
 		</div>
 
@@ -68,8 +72,9 @@
 				<img src="src/assets/img/communication.png" alt="">
 				<span>联系方式</span>
 			</div>
-			<div class="weui-article">
-				<p>{{contact}}</p>
+			<div class="weui-article" style="color: #3c3c3c">
+				<p>手机号: &ensp; {{phoneNumber}}</p>
+				<p>qq号: &ensp; {{qqNumber}}</p>
 			</div>
 		</div>
 
@@ -95,8 +100,6 @@
 					return {
 						id: '',
 						avatar: '',
-						name: '',
-						resume,
 					}
 				},
 				compet () {
@@ -109,13 +112,12 @@
 				},
 				demand: '',
 				members: [
-					{
-						id: '',
-						avatar: '',
-						name: '',
-					},
 				],
 				contact: '',
+				phoneNumber: '',
+				qqNumber: '',
+				founderName: '',
+				founderResume: '',
 			}
 		},
 
@@ -130,12 +132,24 @@
 						let data = response.data;
 						that.title = data.title
 						that.demand = data.demand
-						that.members = data.members
-						that.contact = data.contact
+						if (data.members.length) {
+							that.members = data.members
+						}
+						//联系方式需特别处理
+						[that.phoneNumber, that.qqNumber] = data.contact.split(',')
+						// 竞赛信息
 						that.compet.title = data.compet.title
 						that.compet.type = data.compet.type
 						that.compet.url = data.compet.url
 						that.compet.ddl = data.compet.ddl
+
+						// 发起人信息
+						that.founder.id = data.founder.id
+						that.founder.avatar = data.founder.avatar
+
+						//符合Vue模板语法要求
+						that.founderName = data.founder.name
+						that.founderResume = data.founder.resume
 					}
 
 				})

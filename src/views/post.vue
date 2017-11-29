@@ -35,12 +35,6 @@
 	            </div>
 	        </div>
 	        <div class="weui-cell">
-	            <div class="weui-cell__hd"><label class="weui-label">微信号</label></div>
-	            <div class="weui-cell__bd">
-	                <input class="weui-input" v-model="wechat" placeholder="选填">
-	            </div>
-	        </div>
-	        <div class="weui-cell">
 	            <div class="weui-cell__hd"><label class="weui-label">qq号</label></div>
 	            <div class="weui-cell__bd">
 	                <input class="weui-input"  v-model="qq" placeholder="选填">
@@ -86,13 +80,17 @@
 	import teammates from './teammates.vue'
 	import myHeader from '../components/header.vue'
 	export default {
+
+		mounted () {
+			this.certified()
+		},
+
 		data () {
 			return {
 				title: '',
 				competitionName: '',
 				deadline: '',
 				type: '应用开发',
-				wechat:'',
 				number:'',
 				qq:'',
 				url: '',
@@ -103,6 +101,18 @@
 			}
 		},
 		methods: {
+
+			certified () {
+				ajax.send('GET', '/api/self', data, function (err, response) {
+					if (err) { return }
+					let res = JSON.parse(response);
+					if (res.status == 'error') { 
+						window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id=86705621eba5382a&redirect_uri=http://f.yiban.cn/iapp171981"
+					}
+				})
+			},
+	
+
 			// Use weui.js, help us to realize the Picker. 
 			typePicker () {
 				let $vue = this
@@ -158,7 +168,7 @@
 				this.teammates.forEach(function (item) {
 					membersId.push(item.userId)
 				})
-				let contact = `${this.number},${this.qq},${this.wechat}`;
+				let contact = `${this.number},${this.qq}`;
 				let data = {
 					title: this.title,
 					intro: this.text,
@@ -174,7 +184,11 @@
 				}
 				ajax.send('POST', '/api/groups', data, function (err, data) {
 					if (err) {return}
-					console.log('post sucess!')
+					weui.toast('发布成功', {
+					    duration: 1500,
+					    className: 'custom-classname',
+					    callback: function(){window.location.href = "/#/team"}
+					})
 				})
 			},
 
@@ -189,6 +203,8 @@
 				this.showTeammatesSelect = false
 			},
 		},
+
+
 		computed: {
 
 			// Control the length of description

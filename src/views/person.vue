@@ -33,7 +33,7 @@
 				<img src="src/assets/img/posted.png" alt="">
 				<span>发布过的</span>
 			</div>
-			<content-list></content-list>
+			<content-list :items="groupsList"></content-list>
 		</div>
 
 		<footer-tab></footer-tab>
@@ -57,6 +57,7 @@
 				maxLength: 100,
 				editActive: false,
 				editText: '编辑',
+				groupsList: [],
 			}
 		},
 		methods: {
@@ -88,11 +89,34 @@
 					} else {
 						that.name = res.data.name
 						that.avatar = res.data.avatar
+						that.getGroupList(res.data.id)
 						if (res.data.resume == null) {
 							that.resume = JSON.stringify(res.data.resume)
 						} else {
 							that.resume = res.data.resume
 						}
+					}
+				})
+			},
+
+			getGroupList (id) {
+				let that = this;
+				ajax.send('GET', `/api/users/${id}/group`, {}, function (err, response){
+					if (err) {
+						return
+					} else {
+						let groups = JSON.parse(response).data;
+						if (groups.length) {
+							groups.forEach(function (item) {
+								item.url = {
+									name: 'content',
+	                                params: {
+	                                	contentId: `${item.id}`
+	                                }
+								}
+							})
+							that.groupsList = groups
+						} 
 					}
 				})
 			},
