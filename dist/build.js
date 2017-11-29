@@ -12675,46 +12675,68 @@ if (false) {(function () {
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+
 	name: 'contentBlock',
-	props: {
-		contentId: {
-			required: true
-		},
-		title: {
-			default: ''
-		},
-		competitionName: {
-			default: 'xxx'
-		},
-		competitionTime: {
-			default: 'xxx-xx-xx'
-		},
-		description: {
-			default: 'AAA'
-		}
+
+	mounted() {
+		this.fetchData(this.$route.params.contentId);
 	},
+
 	data: function () {
 		return {
-			teammates: [{
-				userId: 1,
-				userName: '甘宇廷',
-				userAvatar: 'src/assets/img/test.jpg',
-				userDes: '66666666666666666666666666666666666',
-				userSelected: false
-			}, {
-				userId: 2,
-				userName: '姚裕欣',
-				userAvatar: 'src/assets/img/test2.png',
-				userDes: '66666666666666666666666666666666666',
-				userSelected: false
-			}]
+			title: '',
+			founder() {
+				return {
+					id: '',
+					avatar: '',
+					name: '',
+					resume
+				};
+			},
+			compet() {
+				return {
+					title: '',
+					type: '',
+					ddl: '',
+					url: ''
+				};
+			},
+			demand: '',
+			members: [{
+				id: '',
+				avatar: '',
+				name: ''
+			}],
+			contact: ''
 		};
 	},
+
+	methods: {
+		fetchData(competId) {
+			let that = this;
+			ajax.send('GET', `/api/groups/${competId}`, {}, function (err, res) {
+				if (err) {
+					return;
+				}
+				console.log(res);
+				let response = JSON.parse(res);
+				if (response.status == 'ok') {
+					let data = response.data;
+					that.title = data.title;
+					that.demand = data.demand;
+					that.members = data.members;
+					that.contact = data.contact;
+					that.compet.title = data.compet.title;
+					that.compet.type = data.compet.type;
+					that.compet.url = data.compet.url;
+					that.compet.ddl = data.compet.ddl;
+				}
+			});
+		}
+	},
+
 	components: {}
 });
 
@@ -12728,13 +12750,43 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content-block" }, [
-    _c("div", { staticClass: "cb-title" }, [_vm._v("\n\t\tAPP设计大赛求大佬带飞\n\t")]),
+    _c("div", { staticClass: "cb-title" }, [
+      _vm._v("\n\t\t" + _vm._s(_vm.title) + "\n\t")
+    ]),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
-    _vm._m(1),
+    _c("div", { staticClass: "cb-requirements" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "weui-article", staticStyle: { color: "#3c3c3c" } },
+        [
+          _c("p", [_vm._v("比赛名称: " + _vm._s(_vm.compet.title))]),
+          _vm._v(" "),
+          _c("p", [_vm._v("比赛类别: " + _vm._s(_vm.compet.type))]),
+          _vm._v(" "),
+          _c("p", [_vm._v("比赛截止时间: " + _vm._s(_vm.compet.ddl))]),
+          _vm._v(" "),
+          _c("p", [_vm._v("比赛详情:")]),
+          _vm._v(" "),
+          _c("p", [
+            _c("a", { attrs: { href: "#" } }, [_vm._v(_vm._s(_vm.compet.url))])
+          ])
+        ]
+      )
+    ]),
     _vm._v(" "),
-    _vm._m(2),
+    _c("div", { staticClass: "cb-requirements" }, [
+      _vm._m(2),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "weui-article", staticStyle: { color: "#3c3c3c" } },
+        [_c("p", [_vm._v(_vm._s(_vm.demand))])]
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "cb-teammates" }, [
       _vm._m(3),
@@ -12745,15 +12797,21 @@ var render = function() {
           staticClass: "team-members",
           staticStyle: { "margin-left": "15px", padding: "0.4em 0" }
         },
-        _vm._l(_vm.teammates, function(member) {
+        _vm._l(_vm.members, function(member) {
           return _c("div", { staticClass: "team-member-item" }, [
-            _c("img", { attrs: { src: member.userAvatar, alt: "" } })
+            _c("img", { attrs: { src: member.avatar, alt: "" } })
           ])
         })
       )
     ]),
     _vm._v(" "),
-    _vm._m(4)
+    _c("div", { staticClass: "cb-numbers" }, [
+      _vm._m(4),
+      _vm._v(" "),
+      _c("div", { staticClass: "weui-article" }, [
+        _c("p", [_vm._v(_vm._s(_vm.contact))])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -12818,48 +12876,20 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cb-requirements" }, [
-      _c("div", { staticClass: "cb-block-description" }, [
-        _c("img", {
-          attrs: { src: "src/assets/img/introduction.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("span", [_vm._v("比赛信息")])
-      ]),
+    return _c("div", { staticClass: "cb-block-description" }, [
+      _c("img", { attrs: { src: "src/assets/img/introduction.png", alt: "" } }),
       _vm._v(" "),
-      _c("div", { staticClass: "weui-article" }, [
-        _c("p", [_vm._v("比赛名称:")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("APP设计大赛")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("比赛类别:")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("应用开发")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("比赛截止时间:")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("2017年11月30日")]),
-        _vm._v(" "),
-        _c("p", [_vm._v("比赛详情:")]),
-        _vm._v(" "),
-        _c("p", [_c("a", { attrs: { href: "#" } }, [_vm._v("点我")])])
-      ])
+      _c("span", [_vm._v("比赛信息")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cb-requirements" }, [
-      _c("div", { staticClass: "cb-block-description" }, [
-        _c("img", { attrs: { src: "src/assets/img/demand.png", alt: "" } }),
-        _vm._v(" "),
-        _c("span", [_vm._v("招募需求")])
-      ]),
+    return _c("div", { staticClass: "cb-block-description" }, [
+      _c("img", { attrs: { src: "src/assets/img/demand.png", alt: "" } }),
       _vm._v(" "),
-      _c("div", { staticClass: "weui-article" }, [
-        _c("p", [_vm._v("二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。")])
-      ])
+      _c("span", [_vm._v("招募需求")])
     ])
   },
   function() {
@@ -12876,18 +12906,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cb-numbers" }, [
-      _c("div", { staticClass: "cb-block-description" }, [
-        _c("img", {
-          attrs: { src: "src/assets/img/communication.png", alt: "" }
-        }),
-        _vm._v(" "),
-        _c("span", [_vm._v("联系方式")])
-      ]),
+    return _c("div", { staticClass: "cb-block-description" }, [
+      _c("img", {
+        attrs: { src: "src/assets/img/communication.png", alt: "" }
+      }),
       _vm._v(" "),
-      _c("div", { staticClass: "weui-article" }, [
-        _c("p", [_vm._v("微信: 123123")])
-      ])
+      _c("span", [_vm._v("联系方式")])
     ])
   }
 ]
@@ -13878,7 +13902,7 @@ if (false) {(function () {
 			this.teammates.forEach(function (item) {
 				membersId.push(item.userId);
 			});
-			let contact = `number:${this.number}qq:${this.qq}wechat:${this.wechat}`;
+			let contact = `${this.number},${this.qq},${this.wechat}`;
 			let data = {
 				title: this.title,
 				intro: this.text,

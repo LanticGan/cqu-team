@@ -1,7 +1,7 @@
 <template>
 	<div class="content-block">
 		<div class="cb-title">
-			APP设计大赛求大佬带飞
+			{{title}}
 		</div>
 
 		<div class="cb-team-leader">
@@ -32,15 +32,12 @@
 				<img src="src/assets/img/introduction.png" alt="">
 				<span>比赛信息</span>
 			</div>
-			<div class="weui-article">
-				<p>比赛名称:</p>
-				<p>APP设计大赛</p>
-				<p>比赛类别:</p>
-				<p>应用开发</p>
-				<p>比赛截止时间:</p>
-				<p>2017年11月30日</p>
+			<div class="weui-article" style="color: #3c3c3c">
+				<p>比赛名称:&ensp;{{compet.title}}</p>
+				<p>比赛类别:&ensp;{{compet.type}}</p>
+				<p>比赛截止时间:&ensp;{{compet.ddl}}</p>
 				<p>比赛详情:</p>
-				<p><a href="#">点我</a></p>
+				<p><a href="#">{{compet.url}}</a></p>
 			</div>
 		</div>
 
@@ -49,8 +46,8 @@
 				<img src="src/assets/img/demand.png" alt="">
 				<span>招募需求</span>
 			</div>
-			<div class="weui-article">
-				<p>二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。</p>
+			<div class="weui-article" style="color: #3c3c3c">
+				<p>{{demand}}</p>
 			</div>
 		</div>
 
@@ -60,8 +57,8 @@
 				<span>团队现有成员</span>
 			</div>
 			<div class="team-members" style="margin-left:15px;padding: 0.4em 0;">	
-		        <div class="team-member-item" v-for="member in teammates">
-		        		<img :src="member.userAvatar" alt="">
+		        <div class="team-member-item" v-for="member in members">
+		        		<img :src="member.avatar" alt="">
 		        </div>
 	        </div>
 		</div>
@@ -72,7 +69,7 @@
 				<span>联系方式</span>
 			</div>
 			<div class="weui-article">
-				<p>微信: 123123</p>
+				<p>{{contact}}</p>
 			</div>
 		</div>
 
@@ -84,44 +81,67 @@
 
 <script>
 	export default {
+
 		name: 'contentBlock',
-		props: {
-			contentId: {
-				required: true,
-			},
-			title: {
-				default: '',
-			},
-			competitionName: {
-				default: 'xxx',
-			},
-			competitionTime: {
-				default: 'xxx-xx-xx',
-			},
-			description: {
-				default: 'AAA',
-			}
+
+		mounted () {
+			this.fetchData(this.$route.params.contentId)
 		},
+
 		data: function () {
 			return {
-				teammates: [
-					{
-						userId: 1,
-						userName: '甘宇廷',
-						userAvatar: 'src/assets/img/test.jpg',
-						userDes: '66666666666666666666666666666666666',
-						userSelected: false
-					},
-					{
-						userId: 2,
-						userName: '姚裕欣',
-						userAvatar: 'src/assets/img/test2.png',
-						userDes: '66666666666666666666666666666666666',
-						userSelected: false
+				title: '',
+				founder () {
+					return {
+						id: '',
+						avatar: '',
+						name: '',
+						resume,
 					}
-				]
+				},
+				compet () {
+					return {
+						title: '',
+						type: '',
+						ddl: '',
+						url:'',
+					}
+				},
+				demand: '',
+				members: [
+					{
+						id: '',
+						avatar: '',
+						name: '',
+					},
+				],
+				contact: '',
 			}
 		},
+
+		methods: {
+			fetchData (competId) {
+				let that = this;
+				ajax.send('GET', `/api/groups/${competId}`, {}, function(err, res) {
+					if (err) { return }
+					console.log(res)
+					let response = JSON.parse(res);
+					if (response.status == 'ok') {
+						let data = response.data;
+						that.title = data.title
+						that.demand = data.demand
+						that.members = data.members
+						that.contact = data.contact
+						that.compet.title = data.compet.title
+						that.compet.type = data.compet.type
+						that.compet.url = data.compet.url
+						that.compet.ddl = data.compet.ddl
+					}
+
+				})
+			}
+		},
+
 		components: {
 		}
 	}

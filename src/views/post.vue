@@ -158,7 +158,7 @@
 				this.teammates.forEach(function (item) {
 					membersId.push(item.userId)
 				})
-				let contact = `number:${this.number}qq:${this.qq}wechat:${this.wechat}`;
+				let contact = `${this.number},${this.qq},${this.wechat}`;
 				let data = {
 					title: this.title,
 					intro: this.text,
