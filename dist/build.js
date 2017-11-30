@@ -12689,6 +12689,9 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
@@ -12732,7 +12735,6 @@ if (false) {(function () {
 				if (err) {
 					return;
 				}
-				console.log(res);
 				let response = JSON.parse(res);
 				if (response.status == 'ok') {
 					let data = response.data;
@@ -12758,6 +12760,34 @@ if (false) {(function () {
 					that.founderResume = data.founder.resume;
 				}
 			});
+		},
+
+		deleteGroup() {
+			let groupId = this.$route.params.contentId;
+			let closed = confirm('确定关闭招募吗?');
+			if (closed) {
+				ajax.send('DELETE', `/api/groups/${groupId}`, {}, function (err, res) {
+					if (err) {
+						return;
+					}
+					weui.toast('已关闭招募', {
+						duration: 1500,
+						className: 'custom-classname',
+						callback: function () {
+							window.location.href = "/#/team";
+						}
+					});
+				});
+			}
+		}
+	},
+	computed: {
+		selfPost() {
+			if (this.$route.params.selfcontent == 'true') {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	},
 
@@ -12775,7 +12805,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content-block" }, [
     _c("div", { staticClass: "cb-title" }, [
-      _vm._v("\n\t\t" + _vm._s(_vm.title) + "\n\t")
+      _vm._v("\n\t\t\t" + _vm._s(_vm.title) + "\n\t\t")
     ]),
     _vm._v(" "),
     _c(
@@ -12904,7 +12934,30 @@ var render = function() {
           _c("p", [_vm._v("qq号:   " + _vm._s(_vm.qqNumber))])
         ]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.selfPost,
+            expression: "selfPost"
+          }
+        ],
+        staticClass: "m-btn",
+        staticStyle: { "margin-top": "0" }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "m-cancel-btn", on: { click: _vm.deleteGroup } },
+          [_vm._v("\n\t\t\t\t关闭招募\n\t\t\t")]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -13124,7 +13177,8 @@ if (false) {(function () {
 							item.url = {
 								name: 'content',
 								params: {
-									contentId: `${item.id}`
+									contentId: `${item.id}`,
+									selfcontent: `${item.self}`
 								}
 							};
 						});
@@ -13516,8 +13570,8 @@ if (false) {(function () {
 	},
 	data() {
 		return {
-			avatar: '',
-			name: 'text',
+			avatar: 'src/assets/img/test-avatar.png',
+			name: '请登录',
 			resume: '',
 			maxLength: 100,
 			editActive: false,
@@ -13580,7 +13634,8 @@ if (false) {(function () {
 							item.url = {
 								name: 'content',
 								params: {
-									contentId: `${item.id}`
+									contentId: `${item.id}`,
+									selfcontent: 'true'
 								}
 							};
 						});
@@ -13931,7 +13986,7 @@ if (false) {(function () {
 	methods: {
 
 		certified() {
-			ajax.send('GET', '/api/self', data, function (err, response) {
+			ajax.send('GET', '/api/self', {}, function (err, response) {
 				if (err) {
 					return;
 				}
@@ -14908,7 +14963,7 @@ if (false) {(function () {
 	data() {
 		return {
 			avatar: '',
-			name: 'text',
+			name: '',
 			resume: '',
 			groupsList: []
 		};

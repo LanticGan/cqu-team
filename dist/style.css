@@ -308,6 +308,9 @@ body {
 .cb-block-description span {
     vertical-align: middle;
 }
+.team-member-item img {
+  border-radius: 50%;
+}
 
 .content-list {
   margin-bottom: 2em;
@@ -460,6 +463,7 @@ body {
     height: 36px;
 }
 .team-members .team-member-item img {
+      border-radius: 50%;
       width: 100%;
       height: 100%;
 }

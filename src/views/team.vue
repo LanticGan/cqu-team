@@ -79,7 +79,8 @@
 								item.url = {
 									name: 'content',
 	                                params: {
-	                                	contentId: `${item.id}`
+	                                	contentId: `${item.id}`,
+	                                	selfcontent: `${item.self}`,
 	                                }
 								}
 							})

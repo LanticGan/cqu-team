@@ -103,7 +103,7 @@
 		methods: {
 
 			certified () {
-				ajax.send('GET', '/api/self', data, function (err, response) {
+				ajax.send('GET', '/api/self', {}, function (err, response) {
 					if (err) { return }
 					let res = JSON.parse(response);
 					if (res.status == 'error') { 
@@ -274,6 +274,7 @@
 			width: 36px;
 			height: 36px;
 			img {
+				border-radius: 50%;
 				width: 100%;
 				height: 100%;
 			}

@@ -51,8 +51,8 @@
 		},
 		data () {
 			return {
-				avatar: '', 
-				name: 'text',
+				avatar: 'src/assets/img/test-avatar.png', 
+				name: '请登录',
 				resume: '',
 				maxLength: 100,
 				editActive: false,
@@ -111,7 +111,8 @@
 								item.url = {
 									name: 'content',
 	                                params: {
-	                                	contentId: `${item.id}`
+	                                	contentId: `${item.id}`,
+	                                	selfcontent: 'true',
 	                                }
 								}
 							})

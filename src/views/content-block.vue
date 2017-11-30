@@ -77,10 +77,13 @@
 				<p>qq号: &ensp; {{qqNumber}}</p>
 			</div>
 		</div>
-
-	</div>
-
-
+		
+		<div class="m-btn" style="margin-top: 0" v-show="selfPost">
+			<div class="m-cancel-btn" @click="deleteGroup">
+				关闭招募
+			</div>
+		</div>
+</div>
 
 </template>
 
@@ -126,7 +129,6 @@
 				let that = this;
 				ajax.send('GET', `/api/groups/${competId}`, {}, function(err, res) {
 					if (err) { return }
-					console.log(res)
 					let response = JSON.parse(res);
 					if (response.status == 'ok') {
 						let data = response.data;
@@ -153,6 +155,30 @@
 					}
 
 				})
+			},
+
+			deleteGroup () {
+				let groupId = this.$route.params.contentId;
+				let closed = confirm('确定关闭招募吗?')
+				if (closed) {
+					ajax.send('DELETE', `/api/groups/${groupId}`, {}, function(err, res) {
+						if (err) { return } 
+						weui.toast('已关闭招募', {
+				    		duration: 1500,
+				    		className: 'custom-classname',
+				    		callback: function(){window.location.href = "/#/team"}
+						})
+					})
+				}
+			}
+		},
+		computed: {
+			selfPost () {
+				if (this.$route.params.selfcontent == 'true') {
+					return true 
+				} else {
+					return false
+				}
 			}
 		},
 
@@ -205,6 +231,12 @@
 
 		span {
 			vertical-align: middle;
+		}
+	}
+
+	.team-member-item {
+		img {
+			border-radius: 50%;
 		}
 	}
 </style>
