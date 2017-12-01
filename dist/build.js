@@ -11917,7 +11917,7 @@ if (false) {(function () {
 				this.competitionsList = [];
 			}
 
-			ajax.send('GET', '/djangoapi/competitions', queryString, function (err, res) {
+			ajax.send('GET', 'http://www.cquwinner.com/djangoapi/competitions', queryString, function (err, res) {
 				if (err) {
 					return;
 				} else {
@@ -14813,7 +14813,7 @@ if (false) {(function () {
 			let params = {
 				id: competitionId
 			};
-			ajax.send('GET', '/djangoapi/content', params, function (err, res) {
+			ajax.send('GET', 'http://www.cquwinner.com/djangoapi/content', params, function (err, res) {
 				if (err) {
 					return;
 				}
