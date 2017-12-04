@@ -22,7 +22,7 @@
 				let params = {
 					id: competitionId,
 				};
-				ajax.send('GET', '/djangoapi/content', params, function (err, res) {
+				ajax.send('GET', 'http://www.cquwinner.com/djangoapi/content', params, function (err, res) {
 					if (err) { return }
 					let data = JSON.parse(res)
 					document.querySelector(".competition-content").innerHTML = data.content
@@ -36,6 +36,7 @@
 </script>
 <style lang="scss">
 	.competition-content {
+		padding: 15px;
 		img {
 			width: 100%;
 		}

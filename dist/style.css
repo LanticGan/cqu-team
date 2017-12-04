@@ -561,8 +561,11 @@ body {
     border: 1px solid #fb7079;
 }
 
+.competition-content {
+  padding: 15px;
+}
 .competition-content img {
-  width: 100%;
+    width: 100%;
 }
 .competition-title {
   font-size: 1em !important;

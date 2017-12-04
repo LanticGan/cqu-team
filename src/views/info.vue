@@ -127,7 +127,7 @@
 					this.competitionsList = []
 				}
 
-				ajax.send('GET', '/djangoapi/competitions', queryString, function (err, res){
+				ajax.send('GET', 'http://www.cquwinner.com/djangoapi/competitions', queryString, function (err, res){
 					if (err) {
 						return
 					} else {
