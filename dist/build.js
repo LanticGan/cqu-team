@@ -12692,6 +12692,25 @@ if (false) {(function () {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
 
@@ -12703,6 +12722,7 @@ if (false) {(function () {
 
 	data: function () {
 		return {
+			// Competition information
 			title: '',
 			founder() {
 				return {
@@ -12724,7 +12744,11 @@ if (false) {(function () {
 			phoneNumber: '',
 			qqNumber: '',
 			founderName: '',
-			founderResume: ''
+			founderResume: '',
+
+			// Edit
+			isEditing: false,
+			maxLength: 200
 		};
 	},
 
@@ -12779,8 +12803,13 @@ if (false) {(function () {
 					});
 				});
 			}
+		},
+
+		cancelEdit() {
+			window.location.reload();
 		}
 	},
+
 	computed: {
 		selfPost() {
 			if (this.$route.params.selfcontent == 'true') {
@@ -12788,7 +12817,12 @@ if (false) {(function () {
 			} else {
 				return false;
 			}
+		},
+
+		disabled() {
+			return this.demand.length == this.maxLength ? true : false;
 		}
+
 	},
 
 	components: {}
@@ -12894,8 +12928,64 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "weui-article", staticStyle: { color: "#3c3c3c" } },
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.isEditing,
+              expression: "!isEditing"
+            }
+          ],
+          staticClass: "weui-article",
+          staticStyle: { color: "#3c3c3c" }
+        },
         [_c("p", [_vm._v(_vm._s(_vm.demand))])]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isEditing,
+              expression: "isEditing"
+            }
+          ],
+          staticClass: "weui-cell"
+        },
+        [
+          _c("div", { staticClass: "weui-cell__bd" }, [
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.demand,
+                  expression: "demand"
+                }
+              ],
+              staticClass: "weui-textarea",
+              attrs: { id: "edit-resume", disabled: _vm.disabled, rows: "3" },
+              domProps: { value: _vm.demand },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.demand = $event.target.value
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "weui-textarea-counter" }, [
+              _c("span", [_vm._v(_vm._s(_vm.demand.length))]),
+              _vm._v("/" + _vm._s(_vm.maxLength))
+            ])
+          ])
+        ]
       )
     ]),
     _vm._v(" "),
@@ -12943,19 +13033,54 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.selfPost,
-            expression: "selfPost"
+            value: _vm.selfPost && !_vm.isEditing,
+            expression: "selfPost && (!isEditing)"
           }
         ],
-        staticClass: "m-btn",
-        staticStyle: { "margin-top": "0" }
+        staticClass: "operation-bar"
       },
       [
+        _c("div", { staticClass: "cb-edit" }, [
+          _c("img", {
+            attrs: { src: "src/assets/img/edit.png", alt: "" },
+            on: {
+              click: function($event) {
+                _vm.isEditing = true
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
         _c(
           "div",
-          { staticClass: "m-cancel-btn", on: { click: _vm.deleteGroup } },
-          [_vm._v("\n\t\t\t\t关闭招募\n\t\t\t")]
+          { staticClass: "cb-delete", on: { click: _vm.deleteGroup } },
+          [_c("img", { attrs: { src: "src/assets/img/delete.png", alt: "" } })]
         )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isEditing,
+            expression: "isEditing"
+          }
+        ],
+        staticClass: "edit-bar"
+      },
+      [
+        _c("div", { staticClass: "edit-cancel" }, [
+          _c("img", {
+            attrs: { src: "src/assets/img/close.png", alt: "" },
+            on: { click: _vm.cancelEdit }
+          })
+        ]),
+        _vm._v(" "),
+        _vm._m(5)
       ]
     )
   ])
@@ -13011,6 +13136,14 @@ var staticRenderFns = [
       }),
       _vm._v(" "),
       _c("span", [_vm._v("联系方式")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "edit-confirm" }, [
+      _c("img", { attrs: { src: "src/assets/img/check.png", alt: "" } })
     ])
   }
 ]

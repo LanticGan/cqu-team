@@ -246,17 +246,6 @@
 		}
 	}
 
-	.team-mask {
-		position:fixed;
-		top:0;
-		left:0;
-		right:0;
-		bottom:0;
-		background:#eee;
-		z-index: 1000;
-		transition: width .5s;
-		width: 0;
-	}
 
 	.teammates-enter-active, .teammates-leave-active {
 		transition: all .5s;

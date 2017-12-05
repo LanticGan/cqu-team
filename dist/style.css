@@ -311,6 +311,20 @@ body {
 .team-member-item img {
   border-radius: 50%;
 }
+.operation-bar, .edit-bar {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin: 0 auto;
+}
+.operation-bar .cb-edit, .operation-bar .cb-delete, .operation-bar .edit-cancel, .operation-bar .edit-confirm, .edit-bar .cb-edit, .edit-bar .cb-delete, .edit-bar .edit-cancel, .edit-bar .edit-confirm {
+    margin: 0px 20px;
+    width: 24px;
+    height: 24px;
+}
+.operation-bar .cb-edit img, .operation-bar .cb-delete img, .operation-bar .edit-cancel img, .operation-bar .edit-confirm img, .edit-bar .cb-edit img, .edit-bar .cb-delete img, .edit-bar .edit-cancel img, .edit-bar .edit-confirm img {
+      width: 100%;
+}
 
 .content-list {
   margin-bottom: 2em;
@@ -436,17 +450,6 @@ body {
 }
 .competition-type-picker #weui-picker-confirm {
   color: #fb4651 !important;
-}
-.team-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #eee;
-  z-index: 1000;
-  transition: width .5s;
-  width: 0;
 }
 .teammates-enter-active, .teammates-leave-active {
   transition: all .5s;

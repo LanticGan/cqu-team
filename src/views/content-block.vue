@@ -48,9 +48,15 @@
 				<img src="src/assets/img/demand.png" alt="">
 				<span>招募需求</span>
 			</div>
-			<div class="weui-article" style="color: #3c3c3c">
+			<div class="weui-article" style="color: #3c3c3c" v-show="!isEditing">
 				<p>{{demand}}</p>
 			</div>
+			<div class="weui-cell" v-show="isEditing">
+	            <div class="weui-cell__bd">
+		            <textarea  id="edit-resume" v-model="demand" class="weui-textarea"  :disabled="disabled" rows="3"></textarea>
+		            <div class="weui-textarea-counter"><span>{{demand.length}}</span>/{{maxLength}}</div>
+	            </div>
+		    </div>
 		</div>
 
 		<div class="cb-teammates">
@@ -78,11 +84,24 @@
 			</div>
 		</div>
 		
-		<div class="m-btn" style="margin-top: 0" v-show="selfPost">
-			<div class="m-cancel-btn" @click="deleteGroup">
-				关闭招募
+		<div class="operation-bar" v-show="selfPost && (!isEditing)">
+			<div class="cb-edit">
+				<img src="src/assets/img/edit.png" alt="" @click="isEditing = true">
+			</div>
+			<div class="cb-delete" @click="deleteGroup">
+				<img src="src/assets/img/delete.png" alt="">
 			</div>
 		</div>
+
+		<div class="edit-bar" v-show="isEditing">
+			<div class="edit-cancel">
+				<img src="src/assets/img/close.png" alt="" @click="cancelEdit">
+			</div>
+			<div class="edit-confirm">
+				<img src="src/assets/img/check.png" alt="">
+			</div>
+		</div>
+
 </div>
 
 </template>
@@ -98,6 +117,7 @@
 
 		data: function () {
 			return {
+				// Competition information
 				title: '',
 				founder () {
 					return {
@@ -121,6 +141,10 @@
 				qqNumber: '',
 				founderName: '',
 				founderResume: '',
+
+				// Edit
+				isEditing: false,
+				maxLength: 200
 			}
 		},
 
@@ -170,8 +194,13 @@
 						})
 					})
 				}
-			}
+			},
+
+			cancelEdit () {
+				window.location.reload()
+			},
 		},
+
 		computed: {
 			selfPost () {
 				if (this.$route.params.selfcontent == 'true') {
@@ -179,10 +208,16 @@
 				} else {
 					return false
 				}
-			}
+			},
+
+			disabled () {
+				return this.demand.length == this.maxLength ? true : false
+			},
+
 		},
 
 		components: {
+			
 		}
 	}
 </script>
@@ -237,6 +272,21 @@
 	.team-member-item {
 		img {
 			border-radius: 50%;
+		}
+	}
+
+	.operation-bar, .edit-bar{
+		display: flex;
+		justify-content: center;
+		width:50%;
+		margin: 0 auto;
+		.cb-edit, .cb-delete, .edit-cancel, .edit-confirm {
+			margin: 0px 20px;
+			width: 24px;
+			height: 24px;
+			img {
+				width: 100%;
+			}
 		}
 	}
 </style>
