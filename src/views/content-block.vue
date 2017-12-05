@@ -63,6 +63,7 @@
 			<div class="cb-block-description">
 				<img src="src/assets/img/teammates.png" alt="">
 				<span>团队现有成员</span>
+				<span style="float:right;margin-right:5px;color:#b2b2b2;" v-show="isEditing" @click="showTeammatesSelect = true">点击配置</span>
 			</div>
 			<div class="team-members" style="margin-left:15px;padding: 0.4em 0;">
 				<router-link v-for="member in members" :to="'/user/' + member.id" :key="member.id">
@@ -72,6 +73,10 @@
 		       </router-link>
 	        </div>
 		</div>
+
+		<transition name="teammates">
+			<teammates v-show="showTeammatesSelect" @cancelSelect="showTeammatesSelect = false" @confirmSelect="addTeammates"></teammates>
+		</transition>
 
 		<div class="cb-numbers">
 			<div class="cb-block-description">
@@ -107,6 +112,7 @@
 </template>
 
 <script>
+	import teammates from './teammates.vue' 
 	export default {
 
 		name: 'contentBlock',
@@ -144,7 +150,8 @@
 
 				// Edit
 				isEditing: false,
-				maxLength: 200
+				maxLength: 200,
+				showTeammatesSelect: false,
 			}
 		},
 
@@ -199,6 +206,11 @@
 			cancelEdit () {
 				window.location.reload()
 			},
+
+			addTeammates (teammates) {
+				console.log(teammates)
+				this.showTeammatesSelect = false
+			},
 		},
 
 		computed: {
@@ -217,7 +229,7 @@
 		},
 
 		components: {
-			
+			teammates,
 		}
 	}
 </script>
@@ -289,4 +301,20 @@
 			}
 		}
 	}
+
+	.teammates-enter-active, .teammates-leave-active {
+		transition: all .5s;
+	}
+
+	.teammates-enter, .teammates-leave-to {
+		transform: translateX(100%);
+	}
+
+	.cb-requirements {
+		.weui-cell:before {
+			content: '' !important;
+			color: #fff !important;
+		}
+	}
+
 </style>

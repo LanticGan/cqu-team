@@ -72,7 +72,6 @@
 							tempUser.userDes = user.resume
 							tempUser.userSelected = false
 							that.users.push(tempUser)
-							console.log(that.users)
 						}
 					}
 				})
