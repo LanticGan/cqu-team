@@ -12788,19 +12788,19 @@ if (false) {(function () {
 			title: '',
 			founder() {
 				return {
-					id: '',
+					id: 'loading...',
 					avatar: ''
 				};
 			},
 			compet() {
 				return {
-					title: '',
-					type: '',
-					ddl: '',
-					url: ''
+					title: 'loading...',
+					type: 'loading...',
+					ddl: 'loading...',
+					url: 'loading...'
 				};
 			},
-			demand: '',
+			demand: 'loading...',
 			members: [],
 			contact: '',
 			phoneNumber: '',
@@ -13172,7 +13172,18 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "cb-requirements" }, [
-        _vm._m(2),
+        _c(
+          "div",
+          {
+            staticClass: "cb-block-description",
+            class: { clearBottom: _vm.isEditing }
+          },
+          [
+            _c("img", { attrs: { src: "src/assets/img/demand.png", alt: "" } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("招募需求")])
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -13316,7 +13327,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "cb-numbers" }, [
-        _vm._m(3),
+        _vm._m(2),
         _vm._v(" "),
         _c(
           "div",
@@ -13387,7 +13398,12 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _vm._m(4)
+          _c("div", { staticClass: "edit-confirm" }, [
+            _c("img", {
+              attrs: { src: "src/assets/img/check.png", alt: "" },
+              on: { click: _vm.cancelEdit }
+            })
+          ])
         ]
       )
     ],
@@ -13420,29 +13436,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "cb-block-description" }, [
-      _c("img", { attrs: { src: "src/assets/img/demand.png", alt: "" } }),
-      _vm._v(" "),
-      _c("span", [_vm._v("招募需求")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "cb-block-description" }, [
       _c("img", {
         attrs: { src: "src/assets/img/communication.png", alt: "" }
       }),
       _vm._v(" "),
       _c("span", [_vm._v("联系方式")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "edit-confirm" }, [
-      _c("img", { attrs: { src: "src/assets/img/check.png", alt: "" } })
     ])
   }
 ]

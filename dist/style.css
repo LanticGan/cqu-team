@@ -331,9 +331,8 @@ body {
 .teammates-enter, .teammates-leave-to {
   transform: translateX(100%);
 }
-.cb-requirements .weui-cell:before {
-  content: '' !important;
-  color: #fff !important;
+.clearBottom {
+  border-bottom: 0px !important;
 }
 
 .team-members-search {

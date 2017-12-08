@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="cb-requirements">
-			<div class="cb-block-description">
+			<div class="cb-block-description" :class="{clearBottom: isEditing}">
 				<img src="src/assets/img/demand.png" alt="">
 				<span>招募需求</span>
 			</div>
@@ -103,7 +103,7 @@
 				<img src="src/assets/img/close.png" alt="" @click="cancelEdit">
 			</div>
 			<div class="edit-confirm">
-				<img src="src/assets/img/check.png" alt="">
+				<img src="src/assets/img/check.png" alt="" @click="cancelEdit">
 			</div>
 		</div>
 
@@ -127,19 +127,19 @@
 				title: '',
 				founder () {
 					return {
-						id: '',
+						id: 'loading...',
 						avatar: '',
 					}
 				},
 				compet () {
 					return {
-						title: '',
-						type: '',
-						ddl: '',
-						url:'',
+						title: 'loading...',
+						type: 'loading...',
+						ddl: 'loading...',
+						url:'loading...',
 					}
 				},
-				demand: '',
+				demand: 'loading...',
 				members: [
 				],
 				contact: '',
@@ -310,11 +310,8 @@
 		transform: translateX(100%);
 	}
 
-	.cb-requirements {
-		.weui-cell:before {
-			content: '' !important;
-			color: #fff !important;
-		}
+	.clearBottom {
+		border-bottom: 0px !important;
 	}
 
 </style>
