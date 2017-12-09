@@ -13733,22 +13733,7 @@ if (false) {(function () {
 		}
 	},
 	data() {
-		return {
-			itemsa: [{
-				id: 1,
-				username: '甘宇廷',
-				avatar: 'src/assets/img/test.jpg',
-				title: 'APP设计大赛求大佬带飞',
-				description: '二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。',
-				url: {
-					name: 'content',
-					params: {
-						contentId: 1,
-						userName: '甘宇廷'
-					}
-				}
-			}]
-		};
+		return {};
 	},
 
 	methods: {}
@@ -14470,7 +14455,7 @@ if (false) {(function () {
 		postData() {
 			// 如果qq和手机号码都没写
 			if (!this.number && !this.qq) {
-				alert("手机号和qq号请至少填写一个");
+				alert("手机号或qq号请至少填写一个");
 				return;
 			}
 			let membersId = [];

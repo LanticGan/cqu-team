@@ -29,22 +29,6 @@
 		},
 		data () {
 			return {
-				itemsa: [
-					{
-						id:1,
-						username: '甘宇廷',
-						avatar: 'src/assets/img/test.jpg',
-						title: 'APP设计大赛求大佬带飞',
-						description: '二缺一，求开发大佬一枚。目前队内有两个萌新，能端茶倒水，能喊666，都是称职的程序员鼓励师。',
-						url: {
-							name: 'content',
-							params: {
-								contentId: 1,
-								userName: '甘宇廷',
-							}
-						},
-					},
-				]
 			}
 		},
 

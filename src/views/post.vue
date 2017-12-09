@@ -166,7 +166,7 @@
 			postData () {
 				// 如果qq和手机号码都没写
 				if (!this.number && !this.qq) {
-					alert("手机号和qq号请至少填写一个")
+					alert("手机号或qq号请至少填写一个")
 					return 
 				}
 				let membersId = [];
