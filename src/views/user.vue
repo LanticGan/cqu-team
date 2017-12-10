@@ -43,8 +43,8 @@
 		data () {
 			return {
 				avatar: '', 
-				name: '',
-				resume: '',
+				name: 'loading...',
+				resume: 'loading...',
 				groupsList: [],
 			}
 		},
